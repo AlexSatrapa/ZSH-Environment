@@ -17,3 +17,6 @@ function django-tests {
 }
 
 alias manage='python manage.py'
+
+WORKON_HOME=$HOME/Library/Python/VirtualEnvironments
+
