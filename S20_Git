@@ -1,4 +1,6 @@
-# git stuff
+# Inspired by and based on work by J Corbin at
+# http://github.com/jcorbin/zsh-git
+
 function switch {
 	if [ -z "$1" ] ; then
 		git branch
@@ -15,11 +17,6 @@ function gitize() {
    && git gc
 }
 
-# http://github.com/jcorbin/zsh-git
-setopt promptsubst
-autoload -U zgitinit
-zgitinit
-
 function git_rprompt() {
    if ! zgit_isgit ; then
       echo ''
@@ -27,7 +24,7 @@ function git_rprompt() {
    fi
 
    if [ -z "$1" ] ; then
-      x='1;30'
+      x='1;37'
    else
       x=$1
    fi
@@ -47,3 +44,7 @@ function git_rprompt() {
    
    echo "]%{\\e[0m%}"
 }
+
+setopt promptsubst
+autoload -U zgitinit
+zgitinit

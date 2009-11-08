@@ -88,17 +88,15 @@ case "$TERM" in
 		settitle "%n@%m: %~"
 		# Display the new directory when changing directories
 		precmd ()  {
-         settitle "%n@%m: %5(~:%-1~/.../%3~:%~)"
-         RPROMPT=$(git_rprompt)
+			settitle "%n@%m: %5(~:%-1~/.../%3~:%~)"
+			RPROMPT=$(git_rprompt)
       }
 		preexec () { settitle "%n@%m :%5(~:%-1~/.../%3~:%~) - $1" }
-		twolineprompt '35' '35'
-      blackterminal
+		blackterminal
 		;;
 	ansi)
 		unfunction precmd
 		unfunction preexec
-		twolineprompt '0;43' '32'
       blackterminal
 		;;
 	*)
