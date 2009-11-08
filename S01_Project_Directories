@@ -1,0 +1,3 @@
+hash -d inbox=~/Documents/Task\ Management/Inbox
+hash -d pending=~/Documents/Task\ Management/Pending
+hash -d outbox=~/Documents/Task\ Management/Outbox

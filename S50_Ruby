@@ -1,0 +1,6 @@
+# Add path elements for Ruby Gems
+GEM_PATH=`gem environment gempath  | sed 's/:.*//'`
+if [ -d $GEM_PATH ] ; then
+   PATH=$PATH:$GEM_PATH/bin
+fi
+

@@ -1,0 +1,7 @@
+ssh-add -l
+echo -n "X11 Forwarding "
+if [ -n "$DISPLAY" ] ; then
+	echo "through $DISPLAY"
+else
+	echo "is DISABLED!"
+fi

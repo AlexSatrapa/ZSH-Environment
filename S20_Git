@@ -1,0 +1,49 @@
+# git stuff
+function switch {
+	if [ -z "$1" ] ; then
+		git branch
+	else
+		git checkout $1
+	fi
+}
+
+# http://www.jukie.net/~bart/conf/zsh.d/S55_git
+function gitize() {
+   git init \
+   && git add . \
+   && git commit -a -m "Imported into git." \
+   && git gc
+}
+
+# http://github.com/jcorbin/zsh-git
+setopt promptsubst
+autoload -U zgitinit
+zgitinit
+
+function git_rprompt() {
+   if ! zgit_isgit ; then
+      echo ''
+      return
+   fi
+
+   if [ -z "$1" ] ; then
+      x='1;30'
+   else
+      x=$1
+   fi
+
+   echo -n "%{\\e[${x}m%}$(zgit_head) ["
+   if ! zgit_isworktreeclean; then
+      echo -n '!'
+   fi
+   
+   if zgit_hasunmerged; then
+      echo -n '*'
+   fi
+   
+   if zgit_hasuntracked; then
+      echo -n '?'
+   fi
+   
+   echo "]%{\\e[0m%}"
+}

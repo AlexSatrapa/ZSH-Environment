@@ -1,0 +1,19 @@
+source virtualenvwrapper
+
+function manage_options() {
+   LIST=`[ -x ./manage.py ] && ./manage.py help 2>&1 | grep --color=no '^  [a-z0-9]' | awk '{print $1}'`
+   export reply=( $LIST )
+   }
+compctl -g "`manage_options`" ./manage.py
+
+function django-tests {
+	[ -x ./manage.py ] || return 1
+	./manage.py test $1
+	if [ "$?" -eq "0" ] ; then
+		DSTAMP=`date +%F\ %H:%M:%S`
+		git commit -am "Automatically committing after successful testing at $DSTAMP"
+		git diff @{1}
+	fi
+}
+
+alias manage='python manage.py'
