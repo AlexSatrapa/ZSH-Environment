@@ -4,7 +4,7 @@ function manage_options() {
    LIST=`[ -x ./manage.py ] && ./manage.py help 2>&1 | grep --color=no '^  [a-z0-9]' | awk '{print $1}'`
    export reply=( $LIST )
    }
-compctl -g "`manage_options`" ./manage.py
+compctl -g "`manage_options`" django
 
 function django-tests {
 	[ -x ./manage.py ] || return 1
@@ -16,7 +16,7 @@ function django-tests {
 	fi
 }
 
-alias manage='python manage.py'
+alias django='python manage.py'
 
 WORKON_HOME=$HOME/Library/Python/VirtualEnvironments
 
