@@ -1,3 +1,7 @@
 hash -d inbox=~/Documents/Task\ Management/Inbox
 hash -d pending=~/Documents/Task\ Management/Pending
 hash -d outbox=~/Documents/Task\ Management/Outbox
+
+hash -d eve-django=~/Documents/Games/EVE\ Online/EVE
+hash -d skydata=~/Documents/TransACT/Skydata/skydata
+
