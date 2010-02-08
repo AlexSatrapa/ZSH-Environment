@@ -1,7 +1,19 @@
-hash -d inbox=~/Documents/Task\ Management/Inbox
-hash -d pending=~/Documents/Task\ Management/Pending
-hash -d outbox=~/Documents/Task\ Management/Outbox
+OSNAME=`uname`
 
-hash -d eve-django=~/Documents/Games/EVE\ Online/EVE
-hash -d skydata=~/Documents/TransACT/Skydata/skydata
+if [ $OSNAME = 'Darwin' ]; then
+	PROJECTS=$HOME'/Library/Projects'
+else
+	PROJECTS=$HOME'/.projects'
+fi
+
+[ -d $PROJECTS ] || exit
+
+ls -1 $PROJECTS | while read target; do
+	project=`/usr/bin/basename $PROJECTS/$target`
+	directory=`/usr/bin/readlink $PROJECTS/$target`
+	[ -h $PROJECTS/$target ] && hash -d $project=$directory
+	done
+
+#hash -d eve-django=~/Documents/Games/EVE\ Online/EVE
+#hash -d skydata=~/Documents/TransACT/Skydata/skydata
 
