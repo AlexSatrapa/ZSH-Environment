@@ -61,8 +61,8 @@ DIRSTACKSIZE=20
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=2000
 SAVEHIST=2000
-EDITOR=`which bbedit`
-VISUAL=`which bbedit`
+EDITOR=`which bbedit`" -w"
+VISUAL=`which bbedit`" -w"
 export DIRSTACKSIZE HISTFILE HISTSIZE SAVEHIST EDITOR VISUAL WORKON_HOME
 
 bindkey -d
