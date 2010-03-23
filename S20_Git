@@ -1,3 +1,8 @@
+function showdiff {
+   git status
+   GIT_EXTERNAL_DIFF="~/.zsh.d/bbedit-diff-driver" git diff
+}
+
 # Inspired by and based on work by J Corbin at
 # http://github.com/jcorbin/zsh-git
 
