@@ -67,11 +67,16 @@ unset LS_COLORS
 #   x  default foreground or background
 
 # Default is exfxcxdxbxegedabagacad
+# References:
+#  - http://plug-and-pray.blogspot.com/2008/02/lscolors.html
+#  - http://linux-sxs.org/housekeeping/lscolors.html
+#  - http://geoff.greer.fm/lscolors/
 
 function blueterminal
 {
   twolineprompt '30;47' 36
   export LSCOLORS=HxfxcxdxDxegedabagacad
+  export LS_COLORS='di=1;;40:ln=35;40:so=32;40:pi=33;40:ex=1;;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
 }
 
 function blackterminal
@@ -79,12 +84,24 @@ function blackterminal
   twolineprompt '1;33' '32'
   #               ddllssppxxbbccuuggwwoo
   export LSCOLORS=dxcxfxexgxdbdeagabafae
-  export LS_COLORS='no=00:fi=00:di=33:ln=32:so=1;35:ex=36'
+  export LS_COLORS='di=33;40:ln=32;40:so=35;40:pi=34;40:ex=36;40:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
 }
 
 function custom_grass_terminal
 {
+  twolineprompt '1;33' '32'
+  #               ddllssppxxbbccuuggwwoo
+  export LSCOLORS=dxcxfxexgxdbdeagabafae
+  export LS_COLORS='di=33;40:ln=32;40:so=35;40:pi=34;40:ex=36;40:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
 	RPROMPT_COLOUR=32
+}
+
+function perl_terminal
+{
+	twolineprompt '30;47' 36
+	RPROMPT_COLOUR=37
+  export LSCOLORS=dxcxfxexgxdbdeagabafae
+  export LS_COLORS='di=33;40:ln=32;40:so=35;40:pi=34;40:ex=36;40:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
 }
 
 case "$TERM" in
