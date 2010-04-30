@@ -14,6 +14,4 @@ ls -1 $PROJECTS | while read target; do
 	[ -h $PROJECTS/$target ] && hash -d $project=$directory
 	done
 
-#hash -d eve-django=~/Documents/Games/EVE\ Online/EVE
-#hash -d skydata=~/Documents/TransACT/Skydata/skydata
-
+hash -d projects=~/Library/Projects
