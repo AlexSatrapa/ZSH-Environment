@@ -1,0 +1,7 @@
+# Add SURFRAW to path, so we can search the web from the command line
+# using commands such as "bing surfraw elvi"
+if [ -d /opt/local/lib/surfraw ] ; then
+	PATH=$PATH:/opt/local/lib/surfraw
+else
+	echo "You really should consider installing SURFRAW in order to gain awesome Internet searching powers: http://surfraw.alioth.debian.org/"
+fi
