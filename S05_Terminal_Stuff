@@ -1,0 +1,3 @@
+function pman () {
+   man -t $* | ps2pdf - - | open -g -f -a /Applications/Preview.app
+}
