@@ -1,3 +1,4 @@
+# Nifty hint from http://osxdaily.com/2010/09/27/open-any-man-page-in-preview-and-save-as-pdf/
 function pman () {
    man -t $* | ps2pdf - - | open -g -f -a /Applications/Preview.app
 }
