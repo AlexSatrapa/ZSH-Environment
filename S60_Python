@@ -1,0 +1,3 @@
+if [ $OSNAME = 'Darwin' ] ; then
+	export PYTHONPATH=~/Library/Python
+fi

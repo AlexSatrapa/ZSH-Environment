@@ -1,5 +1,3 @@
-source .zsh.d/virtualenvwrapper
-
 function manage_options() {
    LIST=`[ -x ./manage.py ] && ./manage.py help 2>&1 | grep --color=no '^  [a-z0-9]' | awk '{print $1}'`
    export reply=( $LIST )
@@ -16,7 +14,4 @@ function django-tests {
 	fi
 }
 
-alias django='python manage.py'
-
-WORKON_HOME=$HOME/Library/Python/VirtualEnvironments
-
+alias django='./manage.py'
