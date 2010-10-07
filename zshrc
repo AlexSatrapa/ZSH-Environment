@@ -6,20 +6,29 @@
 #
 
 if [ -z "$HOSTNAME" ] ; then
+	echo -n "Checking hostname ..."
 	HOSTNAME=`/bin/hostname -s`
+	echo " name is $HOSTNAME."
 	export HOSTNAME
 fi
 
 uptime
 
-alias ls="ls -G -A"
-alias ll="ls -G -l -A"
-alias lsl="ls -G -l -A"
+OSNAME=`uname`
+
+if [ $OSNAME = 'Darwin' ] ; then
+	alias ls="ls -G -A"
+	alias ll="ls -G -l -A"
+	alias lsl="ls -G -l -A"
+else
+	alias ls="ls --color=auto -A"
+	alias ll="ls --color=auto -A -l"
+	alias lsl="ls --color=auto -A -l"
+fi
 alias lsd="echo Stop tripping, man!"
 alias sl="echo You want \*ls\*, schmuck."
 alias LS="echo 'TURN CAPS LOCK OFF, YOU EEDIOT!'"
 alias less="less -M"
-alias bbedit-ctags="ctags --excmd=number --tag-relative=no --fields=+a+m+n+S -R `pwd`"
 alias svndiff='svn diff | colordiff | less -RM'
 export GREP_OPTIONS=--color=auto
 export GREP_COLOR=1
@@ -44,7 +53,7 @@ function mp
   mv $SOURCE $DEST/$DIR
 }
 
-export PAGER="/usr/bin/less -M"
+export PAGER="/usr/bin/less -MR"
 
 setopt AUTO_LIST
 setopt AUTO_PUSHD
@@ -56,14 +65,15 @@ setopt MARK_DIRS
 setopt PUSHD_IGNORE_DUPS
 #setopt RM_STAR_WAIT
 
-WORKON_HOME=$HOME/Library/Python/VirtualEnvironments
 DIRSTACKSIZE=20
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=2000
 SAVEHIST=2000
-EDITOR=`which bbedit`" -w --resume"
-VISUAL=`which bbedit`" -w --resume"
-export DIRSTACKSIZE HISTFILE HISTSIZE SAVEHIST EDITOR VISUAL WORKON_HOME
+if [ $OSNAME = 'Darwin' ] ; then
+	export EDITOR=`which bbedit`" -w --resume"
+	export VISUAL=`which bbedit`" -w --resume"
+fi
+export DIRSTACKSIZE HISTFILE HISTSIZE SAVEHIST
 
 bindkey -d
 bindkey -e

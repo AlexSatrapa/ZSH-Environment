@@ -1,17 +1,16 @@
-OSNAME=`uname`
-
 if [ $OSNAME = 'Darwin' ]; then
 	PROJECTS=$HOME'/Library/Projects'
 else
 	PROJECTS=$HOME'/.projects'
 fi
 
-[ -d $PROJECTS ] || exit
-
-ls -1 $PROJECTS | while read target; do
-	project=`/usr/bin/basename $PROJECTS/$target`
-	directory=`/usr/bin/readlink $PROJECTS/$target`
-	[ -h $PROJECTS/$target ] && hash -d $project=$directory
-	done
-
-hash -d projects=~/Library/Projects
+if [ -d $PROJECTS ] ; then
+	ls -1 $PROJECTS | while read target; do
+		project=`/usr/bin/basename $PROJECTS/$target`
+		directory=`/usr/bin/readlink $PROJECTS/$target`
+		[ -h $PROJECTS/$target ] && hash -d $project=$directory
+		done
+	hash -d projects=$PROJECTS
+else
+	echo "No projects directory '$PROJECTS'"
+fi
