@@ -102,7 +102,6 @@ function mkperlvirtualenv () {
 		make test && make install
 		cd ..
 		rm -rf local-lib*
-		sed "s|@@FULL-PATH-HERE@@|${PERLENV}|" < "${WORKON_HOME}/.activate.template" > "${PERLENV}/bin/activate"
 		perlbin=`which perl`
 		cat > ${PERLENV}/bin/perl << EOF
 #!/bin/sh
