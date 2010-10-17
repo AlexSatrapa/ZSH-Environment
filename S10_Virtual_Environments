@@ -86,8 +86,7 @@ function mkvirtualenv () {
 }
 
 function mkperlvirtualenv () {
-	VIRTENV=$1 
-	PERLENV="$WORKON_HOME/$VIRTENV" 
+	PERLENV="$WORKON_HOME/$1"
 	TARBALL_URL=http://search.cpan.org/CPAN/authors/id/G/GE/GETTY/local-lib-1.006005.tar.gz 
 	verify_workon_home
 	(
