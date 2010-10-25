@@ -87,13 +87,18 @@ function mkvirtualenv () {
 
 function mkperlvirtualenv () {
 	PERLENV="$WORKON_HOME/$1"
-	TARBALL_URL=http://search.cpan.org/CPAN/authors/id/G/GE/GETTY/local-lib-1.006005.tar.gz 
+	TARBALL_URL=http://search.cpan.org/CPAN/authors/id/G/GE/GETTY
 	verify_workon_home
 	(
 		cd "$WORKON_HOME"
 		virtualenv "$@"
 		cd $PERLENV
-		wget -O local-lib.tar.gz "${TARBALL_URL}"
+		wget -O CHECKSUMS $TARBALL_URL/CHECKSUMS
+		[ -f CHECKSUMS ] || exit
+		PACKAGE_NAME=`grep "local-lib.*tar.gz" CHECKSUMS | sed 's#^.*\(local-lib-.*\.tar\.gz\).*$#\1#' | sort | tail -1`
+		rm CHECKSUMS
+		echo "Fetching $PACKAGE_NAME"
+		wget -O local-lib.tar.gz "${TARBALL_URL}/${PACKAGE_NAME}"
 		tar xvf local-lib.tar.gz
 		cd local-lib-*
 		[ -f Makefile.PL ] || exit 1
