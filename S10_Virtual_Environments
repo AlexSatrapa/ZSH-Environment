@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+#
 # Modified version of Dough Hellmann's virtualenvwrapper
 # http://www.doughellmann.com/projects/virtualenvwrapper/
 
@@ -13,17 +15,6 @@
 # Shell functions to act as wrapper for Ian Bicking's virtualenv
 # (http://pypi.python.org/pypi/virtualenv)
 #
-
-#
-# Setup:
-#
-#  1. Add a line like "export WORKON_HOME=$HOME/.virtualenvs" to your .zshrc.
-#  2. Run: workon
-#  3. A list of environments, empty, is printed.
-#  4. Run: mkvirtualenv temp
-#  5. The virtual environment is activated.
-#  5. Run: workon
-#  6. This time, the "temp" environment is included in the list.
 
 # Make sure there is a default value for WORKON_HOME.
 # You can override this setting in your .bashrc.
@@ -88,6 +79,21 @@ function mkvirtualenv () {
 	workon $(_lastarg "$@")
 }
 
+function insert_perlish {
+        sed '/unset VIRTUAL_ENV/ a\
+\    unset PERLENV\
+\    unset PERL5LIB\
+\    unset MODULEBUILDRC\
+\    unset PERL_MM_OPT\
+' $1 | sed '/export VIRTUAL_ENV/ a\
+PERLENV=$VIRTUAL_ENV\
+eval $(perl -I${PERLENV}/lib/perl5 -Mlocal::lib=${PERLENV} -MCPAN)\
+export VIRTUAL_ENV PERLENV PATH
+' > /tmp/blah
+mv /tmp/blah $1
+}
+
+
 function mkperlvirtualenv () {
 	PERLENV="$WORKON_HOME/$1"
 	TARBALL_URL=http://search.cpan.org/CPAN/authors/id/G/GE/GETTY
@@ -109,6 +115,7 @@ function mkperlvirtualenv () {
 		make test && make install
 		cd ..
 		rm -rf local-lib*
+		insert_perlish $PERLENV/bin/activate
 		perlbin=`which perl`
 		cat > ${PERLENV}/bin/perl << EOF
 #!/bin/sh
