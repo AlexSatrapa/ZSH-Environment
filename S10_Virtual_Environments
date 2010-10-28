@@ -1,5 +1,14 @@
+# Modified version of Dough Hellmann's virtualenvwrapper
+# http://www.doughellmann.com/projects/virtualenvwrapper/
+
+# This copy is modified and redistributed as per — and continues to apply — Doug's license:
+
+# Copyright Doug Hellmann, All Rights Reserved
 #
-# $Id: virtualenvwrapper_bashrc 1854 2008-12-18 13:07:06Z dhellmann $
+# Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in supporting documentation, and that the name of Doug Hellmann not be used in advertising or publicity pertaining to distribution of the software without specific, written prior permission.
+
+# DOUG HELLMANN DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL DOUG HELLMANN BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
 #
 # Shell functions to act as wrapper for Ian Bicking's virtualenv
 # (http://pypi.python.org/pypi/virtualenv)
@@ -8,19 +17,13 @@
 #
 # Setup:
 #
-#  1. Add a line like "export WORKON_HOME=$HOME/.virtualenvs"
-#	 to your .bashrc.
-#  2. Add a line like "source /path/to/this/file/virtualenvwrapper_bashrc"
-#	 to your .bashrc.
-#  3. Run: source ~/.bashrc
-#  4. Run: workon
-#  5. A list of environments, empty, is printed.
-#  6. Run: mkvirtualenv temp
-#  7. Run: workon
-#  8. This time, the "temp" environment is included.
-#  9. Run: workon temp
-# 10. The virtual environment is activated.
-#
+#  1. Add a line like "export WORKON_HOME=$HOME/.virtualenvs" to your .zshrc.
+#  2. Run: workon
+#  3. A list of environments, empty, is printed.
+#  4. Run: mkvirtualenv temp
+#  5. The virtual environment is activated.
+#  5. Run: workon
+#  6. This time, the "temp" environment is included in the list.
 
 # Make sure there is a default value for WORKON_HOME.
 # You can override this setting in your .bashrc.
