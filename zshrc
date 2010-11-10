@@ -1,6 +1,5 @@
 #
 # Alex's ZSH environment
-# $Id$
 #
 #  vim: ts=3 sw=3 noet 
 #
@@ -39,19 +38,6 @@ PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 if [ -d $HOME/Applications ] ; then
 	PATH=$PATH:$HOME/Applications
 fi
-
-# Move file with path
-function mp
-{
-  SOURCE=$1
-  DEST=$2
-  [ -f $SOURCE ] || exit 1
-  [ -d $DEST ] || exit 2
-  FILE=`basename $SOURCE`
-  DIR=`dirname $SOURCE`
-  mkdir -p $DEST/$DIR
-  mv $SOURCE $DEST/$DIR
-}
 
 export PAGER="/usr/bin/less -MR"
 
