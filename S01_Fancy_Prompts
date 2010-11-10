@@ -14,9 +14,9 @@ function twolineprompt
 
 function funkyprompt
 {
-   RPROMPT=`echo "\\e[$1m<<%n@%m:%~\\e[0m"`
-   PS1=`echo "%{\\e[$2m%}%D{%k:%M} [%?|%!]%#%{\\e[0m%} "`
-   return 0
+	RPROMPT=`echo "\\e[$1m<<%n@%m:%~\\e[0m"`
+	PS1=`echo "%{\\e[$2m%}%D{%k:%M} [%?|%!]%#%{\\e[0m%} "`
+	return 0
 }
 
 # I often like using shortprompt '41;37;1'
@@ -74,25 +74,25 @@ unset LS_COLORS
 
 function blue_terminal
 {
-  twolineprompt '30;47' 36
-  export LSCOLORS=HxfxcxdxDxegedabagacad
-  export LS_COLORS='di=1:ln=1;35:so=32;40:pi=33;40:ex=1;33:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
+	twolineprompt '30;47' 36
+	export LSCOLORS=HxfxcxdxDxegedabagacad
+	export LS_COLORS='di=1:ln=1;35:so=32;40:pi=33;40:ex=1;33:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
 }
 
 function black_terminal
 {
-  twolineprompt '1;33' '32'
-  #               ddllssppxxbbccuuggwwoo
-  export LSCOLORS=dxcxfxexgxdbdeagabafae
-  export LS_COLORS='di=33:ln=32:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
+	twolineprompt '1;33' '32'
+	#               ddllssppxxbbccuuggwwoo
+	export LSCOLORS=dxcxfxexgxdbdeagabafae
+	export LS_COLORS='di=33:ln=32:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
 }
 
 function custom_grass_terminal
 {
-  twolineprompt '1;33' '32'
-  #               ddllssppxxbbccuuggwwoo
-  export LSCOLORS=dxcxfxexgxdbdeagabafae
-  export LS_COLORS='di=33;40:ln=32;40:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
+	twolineprompt '1;33' '32'
+	#               ddllssppxxbbccuuggwwoo
+	export LSCOLORS=dxcxfxexgxdbdeagabafae
+	export LS_COLORS='di=33;40:ln=32;40:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
 	RPROMPT_COLOUR=32
 }
 
@@ -100,8 +100,8 @@ function perl_terminal
 {
 	twolineprompt '30;47' 36
 	RPROMPT_COLOUR=37
-  export LSCOLORS=dxcxfxexgxdbdeagabafae
-  export LS_COLORS='di=33:ln=32:so=35;40:pi=34;40:ex=36;40:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
+	export LSCOLORS=dxcxfxexgxdbdeagabafae
+	export LS_COLORS='di=33:ln=32:so=35;40:pi=34;40:ex=36;40:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
 }
 
 case "$TERM" in
@@ -112,19 +112,19 @@ case "$TERM" in
 		precmd ()  {
 			settitle "%n@%m: %5(~:%-1~/.../%3~:%~)"
 			RPROMPT=$(git_rprompt $RPROMPT_COLOUR)
-      }
+		}
 		preexec () { settitle "%n@%m: %5(~:%-1~/.../%3~:%~) - $1" }
 		black_terminal
 		;;
 	ansi)
 		unfunction precmd
 		unfunction preexec
-      black_terminal
+		black_terminal
 		;;
 	*)
 		unfunction precmd
 		unfunction preexec
-      black_terminal
+		black_terminal
 		# Generate safe prompt
 		PS1="[%?|%!]-[%n@%m: %~]%# "
 		;;
