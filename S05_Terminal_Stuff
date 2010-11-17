@@ -1,4 +1,16 @@
 # Nifty hint from http://osxdaily.com/2010/09/27/open-any-man-page-in-preview-and-save-as-pdf/
-function pman () {
-   man -t $* | ps2pdf - - | open -g -f -a /Applications/Preview.app
+export PSMAN_CACHE_PATH=~/Library/Caches/psman
+function psman () {
+	TARGET=$1
+	
+	if [ ! -f $PSMAN_CACHE_PATH/$TARGET.pdf ] ; then
+		man -t $TARGET > $PSMAN_CACHE_PATH/$TARGET.ps
+		if [ ! $? = 0 ] ; then
+			rm -f $PSMAN_CACHE_PATH/$TARGET.ps
+			echo "No manual entry for $TARGET."
+			return
+		fi
+		ps2pdf $PSMAN_CACHE_PATH/$TARGET.ps $PSMAN_CACHE_PATH/$TARGET.pdf
+	fi
+	open -g -a /Applications/Preview.app $PSMAN_CACHE_PATH/$TARGET.pdf
 }
