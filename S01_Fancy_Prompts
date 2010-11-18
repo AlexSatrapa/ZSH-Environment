@@ -8,7 +8,7 @@ function twolineprompt
 {
 	# Generate two-line command prompt
 	PS1=`echo "%{\\e[$1m[%n@%m:%~]\\e[0m\n\\e[$2m%}%D{%k:%M} [%?|%!]%#%{\\e[0m%} "`
-   unset RPROMPT
+	unset RPROMPT
 	return 0
 }
 
@@ -82,6 +82,7 @@ function blue_terminal
 function black_terminal
 {
 	twolineprompt '1;33' '32'
+	export RPROMPT_COLOUR=30
 	#               ddllssppxxbbccuuggwwoo
 	export LSCOLORS=dxcxfxexgxdbdeagabafae
 	export LS_COLORS='di=33:ln=32:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
@@ -93,13 +94,13 @@ function custom_grass_terminal
 	#               ddllssppxxbbccuuggwwoo
 	export LSCOLORS=dxcxfxexgxdbdeagabafae
 	export LS_COLORS='di=33;40:ln=32;40:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
-	RPROMPT_COLOUR=32
+	export RPROMPT_COLOUR=32
 }
 
 function perl_terminal
 {
-	twolineprompt '30;47' 36
-	RPROMPT_COLOUR=37
+	twolineprompt 1 1
+	export RPROMPT_COLOUR='0'
 	export LSCOLORS=dxcxfxexgxdbdeagabafae
 	export LS_COLORS='di=33:ln=32:so=35;40:pi=34;40:ex=36;40:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
 }
