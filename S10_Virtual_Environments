@@ -75,7 +75,8 @@ function _lastarg () {
 #
 function mkvirtualenv () {
 	verify_workon_home
-	(cd "$WORKON_HOME"; virtualenv "$@") 
+	(cd "$WORKON_HOME"; virtualenv "$@")
+	update_workon_tab_completion
 	workon $(_lastarg "$@")
 }
 
@@ -85,14 +86,13 @@ function insert_perlish {
 \    unset PERL5LIB\
 \    unset MODULEBUILDRC\
 \    unset PERL_MM_OPT\
-' $1 | sed '/export VIRTUAL_ENV/ a\
+' $1 | sed '/export PATH/ a\
 PERLENV=$VIRTUAL_ENV\
 eval $(perl -I${PERLENV}/lib/perl5 -Mlocal::lib=${PERLENV} -MCPAN)\
-export VIRTUAL_ENV PERLENV PATH
+export VIRTUAL_ENV PERLENV
 ' > /tmp/blah
 mv /tmp/blah $1
 }
-
 
 function mkperlvirtualenv () {
 	PERLENV="$WORKON_HOME/$1"
@@ -124,6 +124,7 @@ ${perlbin} -I\$PERLENV/lib/perl5 -Mlocal::lib=\$PERLENV -MCPAN \$@
 EOF
 		chmod 755 $PERLENV/bin/perl
 	)
+	update_workon_tab_completion
 	workon $(_lastarg "$@")
 }
 
@@ -144,6 +145,7 @@ function rmvirtualenv () {
 		return 1
 	fi
 	rm -rf "$env_dir"
+	update_workon_tab_completion
 }
 
 # List the available environments.
@@ -192,19 +194,21 @@ function workon () {
 # Set up tab completion.  (Adapted from Arthur Koziel's version at 
 # http://arthurkoziel.com/2008/10/11/virtualenvwrapper-bash-completion/)
 # 
+function update_workon_tab_completion() {
+	if [ -n "$BASH" ] ; then
+		_virtualenvs ()
+		{
+			local cur="${COMP_WORDS[COMP_CWORD]}"
+			COMPREPLY=( $(compgen -W "`show_workon_options`" -- ${cur}) )
+		}
 
-if [ -n "$BASH" ] ; then
-	_virtualenvs ()
-	{
-		local cur="${COMP_WORDS[COMP_CWORD]}"
-		COMPREPLY=( $(compgen -W "`show_workon_options`" -- ${cur}) )
-	}
-
-	complete -o default -o nospace -F _virtualenvs workon
-	complete -o default -o nospace -F _virtualenvs rmvirtualenv
-elif [ -n "$ZSH_VERSION" ] ; then
-	compctl -g "`show_workon_options`" workon rmvirtualenv
-fi
+		complete -o default -o nospace -F _virtualenvs workon
+		complete -o default -o nospace -F _virtualenvs rmvirtualenv
+	elif [ -n "$ZSH_VERSION" ] ; then
+		compctl -g "`show_workon_options`" workon rmvirtualenv
+	fi
+}
+update_workon_tab_completion
 
 # Path management for packages outside of the virtual env.
 # Based on a contribution from James Bennett and Jannis Leidel.
@@ -230,7 +234,7 @@ function add2virtualenv () {
 		echo "ERROR: currently-active virtualenv does not appear to have a site-packages directory"
 		return 1
 	fi
-	
+
 	path_file="$site_packages/virtualenv_path_extensions.pth"
 
 	if [ "$*" = "" ]
