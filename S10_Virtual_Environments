@@ -124,10 +124,11 @@ ${perlbin} -I\$PERLENV/lib/perl5 -Mlocal::lib=\$PERLENV -MCPAN \$@
 EOF
 		chmod 755 $PERLENV/bin/perl
 		rehash
-		cpan Module::Build
 	)
 	update_workon_tab_completion
 	workon $(_lastarg "$@")
+	cpan Module::Build
+	cpan Digest::SHA
 }
 
 # Remove an environment, in the WORKON_HOME.
