@@ -12,5 +12,5 @@ function psman () {
 		fi
 		ps2pdf $PSMAN_CACHE_PATH/$TARGET.ps $PSMAN_CACHE_PATH/$TARGET.pdf
 	fi
-	open -g -a /Applications/Preview.app $PSMAN_CACHE_PATH/$TARGET.pdf
+	open -a /Applications/Preview.app $PSMAN_CACHE_PATH/$TARGET.pdf
 }
