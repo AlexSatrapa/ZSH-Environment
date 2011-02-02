@@ -4,6 +4,14 @@ function settitle
 	return 0
 }
 
+# One day I'll have a funky prompt like Steve Losh:
+# http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+function scm_prompt_char {
+	git branch >/dev/null 2>/dev/null && echo '±' && return
+	hg root >/dev/null 2>/dev/null && echo '☿' && return
+	echo '○'
+}
+
 function twolineprompt
 {
 	# Generate two-line command prompt
