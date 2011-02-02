@@ -102,7 +102,7 @@ function perl_terminal
 	twolineprompt 1 1
 	export RPROMPT_COLOUR='0'
 	export LSCOLORS=dxcxfxexgxdbdeagabafae
-	export LS_COLORS='di=33:ln=32:so=35;40:pi=34;40:ex=36;40:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
+	export LS_COLORS='di=33:ln=32:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
 }
 
 case "$TERM" in
