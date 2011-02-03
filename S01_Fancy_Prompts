@@ -1,15 +1,10 @@
+# One day I'll have a funky prompt like Steve Losh:
+# http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+
 function settitle
 {
 	print -Pn "\e]0;$1\a"
 	return 0
-}
-
-# One day I'll have a funky prompt like Steve Losh:
-# http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
-function scm_prompt_char {
-	git branch >/dev/null 2>/dev/null && echo '±' && return
-	hg root >/dev/null 2>/dev/null && echo '☿' && return
-	echo '○'
 }
 
 function twolineprompt
@@ -120,7 +115,6 @@ case "$TERM" in
 		# Display the new directory when changing directories
 		precmd ()  {
 			settitle "%n@%m: %5(~:%-1~/.../%3~:%~)"
-			RPROMPT=$(git_rprompt $RPROMPT_COLOUR)
 		}
 		preexec () { settitle "%n@%m: %5(~:%-1~/.../%3~:%~) - $1" }
 		black_terminal
