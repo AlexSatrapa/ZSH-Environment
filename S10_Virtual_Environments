@@ -129,6 +129,7 @@ EOF
 	workon $(_lastarg "$@")
 	cpan Module::Build
 	cpan Digest::SHA
+	cpan YAML
 }
 
 # Remove an environment, in the WORKON_HOME.
