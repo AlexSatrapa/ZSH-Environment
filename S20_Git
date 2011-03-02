@@ -22,7 +22,7 @@ function gitize() {
    && git gc
 }
 
-function svnsync {
+function pullpush {
    git svn rebase && git svn dcommit
    }
 
