@@ -18,6 +18,8 @@
 
 # Make sure there is a default value for WORKON_HOME.
 # You can override this setting in your .bashrc.
+# Note: in Alex's ZSH Environment, add a ~/.zsh.d/S99_WorkonHome file
+# which just sets the WORKON_HOME environment variable.
 if [ "$WORKON_HOME" = "" ] ; then
 	if [ "$OSNAME" = 'Darwin' ] ; then
 		WORKON_HOME=$HOME/Library/VirtualEnvironments
