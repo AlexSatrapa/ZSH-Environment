@@ -56,7 +56,6 @@ esac
 # See if we've already got an authentication socket. This might
 # have been passed to us by SSH from a remote host, for example.
 if [ ! -z "$SSH_AUTH_SOCK" ] ; then
-	echo "SSH authentication socket specified in environment ($SSH_AUTH_SOCK)."
 	if ([ "`ssh-add -l 2>&1`" = "Could not open a connection to your authentication agent." ]) ; then
 		echo "No answer from SSH_AUTH_SOCK, trying pre-defined agent."
 		. $INFOPATH
@@ -72,7 +71,7 @@ fi
 # On Darwin, $SSH_AUTH_SOCK points to a 's' (socket) special file.
 # On Linux, $SSH_AUTH_SOCK points to a 'p' (pipe) special file.
 if ([ -S $SSH_AUTH_SOCK ] || [ -p $SSH_AUTH_SOCK ]) ; then
-	echo "Using previously obtained SSH socket."
+	true
 else
 	echo "Previous SSH socket not found - starting a new agent."
 	load_agent

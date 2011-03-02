@@ -1,6 +1,5 @@
 function manage_options() {
    LIST=`[ -x ./manage.py ] && ./manage.py help 2>&1 | grep --color=no '^  [a-z0-9]' | awk '{print $1}'`
-   export reply=( $LIST )
    }
 compctl -g "`manage_options`" django
 

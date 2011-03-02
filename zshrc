@@ -4,14 +4,14 @@
 #  vim: ts=3 sw=3 noet 
 #
 
+uptime
+
 if [ -z "$HOSTNAME" ] ; then
 	echo -n "Checking hostname ..."
 	HOSTNAME=`/bin/hostname -s`
 	echo " name is $HOSTNAME."
 	export HOSTNAME
 fi
-
-uptime
 
 OSNAME=`uname`
 
