@@ -88,6 +88,7 @@ function insert_perlish {
 \    unset PERL5LIB\
 \    unset MODULEBUILDRC\
 \    unset PERL_MM_OPT\
+\    unset PERL_MB_OPT\
 ' $1 | sed '/PATH="$VIRTUAL_ENV\/bin:$PATH"/ a\
 PERLENV=$VIRTUAL_ENV\
 eval $(perl -I${PERLENV}/lib/perl5 -Mlocal::lib=${PERLENV} -MCPAN)\
