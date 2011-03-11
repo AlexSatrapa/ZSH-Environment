@@ -2,6 +2,10 @@
 # using commands such as "bing surfraw elvi"
 if [ -d /opt/local/lib/surfraw ] ; then
 	PATH=$PATH:/opt/local/lib/surfraw
+	export SURFRAW_graphical_browser=/usr/bin/open
+	export SURFRAW_text_browser=/usr/bin/open
+	export SURFRAW_graphical=yes
 else
 	echo "You really should consider installing SURFRAW in order to gain awesome Internet searching powers: http://surfraw.alioth.debian.org/"
 fi
+
