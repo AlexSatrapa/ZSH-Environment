@@ -77,14 +77,12 @@ unset LS_COLORS
 
 function blue_terminal
 {
-	twolineprompt '30;47' 36
 	export LSCOLORS=HxfxcxdxDxegedabagacad
 	export LS_COLORS='di=1:ln=1;35:so=32;40:pi=33;40:ex=1;33:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
 }
 
 function black_terminal
 {
-	twolineprompt '1;33' '32'
 	export RPROMPT_COLOUR=30
 	#               ddllssppxxbbccuuggwwoo
 	export LSCOLORS=dxcxfxexgxdbdeagabafae
@@ -93,7 +91,6 @@ function black_terminal
 
 function custom_grass_terminal
 {
-	twolineprompt '1;33' '32'
 	#               ddllssppxxbbccuuggwwoo
 	export LSCOLORS=dxcxfxexgxdbdeagabafae
 	export LS_COLORS='di=33;40:ln=32;40:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
@@ -102,7 +99,6 @@ function custom_grass_terminal
 
 function perl_terminal
 {
-	twolineprompt 1 1
 	export RPROMPT_COLOUR='0'
 	export LSCOLORS=dxcxfxexgxdbdeagabafae
 	export LS_COLORS='di=33:ln=32:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
