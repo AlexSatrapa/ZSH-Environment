@@ -24,6 +24,7 @@ function gitize() {
 
 function pullpush {
    git svn rebase && git svn dcommit
+   [ -x /usr/bin/bbedit ] && /usr/bin/bbedit --maketags . 2> /dev/null
    }
 
 function git_rprompt() {
