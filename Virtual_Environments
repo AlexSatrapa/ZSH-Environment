@@ -130,9 +130,10 @@ EOF
 	)
 	update_workon_tab_completion
 	workon $(_lastarg "$@")
-	cpan Module::Build
+	PERL_MM_USE_DEFAULT=1
+	cpan CPAN::SQLite
 	cpan Digest::SHA
-	cpan YAML
+	cpan Module::Build
 }
 
 # Remove an environment, in the WORKON_HOME.
