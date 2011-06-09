@@ -4,11 +4,18 @@ else
 	PROJECTS=$HOME'/.projects'
 fi
 
-if [ -d $PROJECTS ] ; then
-	ls -1 $PROJECTS | while read target; do
+function add_project {
+	target=$1
+	if [ -h $PROJECTS/$target ] ; then
 		project=`/usr/bin/basename $PROJECTS/$target`
 		directory=`/usr/bin/readlink $PROJECTS/$target`
-		[ -h $PROJECTS/$target ] && hash -d $project=$directory
+		hash -d $project=$directory
+		fi
+	}
+
+if [ -d $PROJECTS ] ; then
+	ls -1 $PROJECTS | while read target; do
+		add_project $target
 		done
 	hash -d projects=$PROJECTS
 else
