@@ -42,14 +42,14 @@ fi
 export PAGER="/usr/bin/less -MR"
 
 setopt AUTO_LIST
-setopt AUTO_PUSHD
+setopt APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_VERIFY
 setopt HIST_NO_STORE
 setopt SHARE_HISTORY
 setopt MARK_DIRS
+setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
-#setopt RM_STAR_WAIT
 
 DIRSTACKSIZE=20
 HISTFILE=$HOME/.zsh_history
