@@ -105,7 +105,7 @@ function perl_terminal
 }
 
 case "$TERM" in
-	nsterm | rxvt | xterm | xterm-color)
+	nsterm | rxvt | xterm | xterm-color | xterm-256color)
 		# Use window titlebar to display some information
 		settitle "%n@%m: %~"
 		# Display the new directory when changing directories
