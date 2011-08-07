@@ -14,3 +14,12 @@ function psman () {
 	fi
 	open -a /Applications/Preview.app $PSMAN_CACHE_PATH/$TARGET.pdf
 }
+
+# From ZSH mailing list: 'open -a' should provide a list of applications in
+# /Applications
+function _open() {
+   local -a app_path
+   app_path=(/Applications/*(/))
+   _path_files -W app_path -g '*.app'
+   }
+
