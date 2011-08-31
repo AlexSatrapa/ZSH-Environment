@@ -82,20 +82,172 @@ function mkvirtualenv () {
 	workon $(_lastarg "$@")
 }
 
-function insert_perlish {
-        sed '/unset VIRTUAL_ENV/ a\
-\    unset PERLENV\
-\    unset PERL5LIB\
-\    unset MODULEBUILDRC\
-\    unset PERL_MM_OPT\
-\    unset PERL_MB_OPT\
-' $1 | sed '/PATH="$VIRTUAL_ENV\/bin:$PATH"/ a\
-PERLENV=$VIRTUAL_ENV\
-eval $(perl -I${PERLENV}/lib/perl5 -Mlocal::lib=${PERLENV} -MCPAN)\
-export VIRTUAL_ENV PERLENV
-' > /tmp/blah
-mv /tmp/blah $1
+function configure_cpan {
+	PERLENV=$1
+	mkdir -p $PERLENV/lib/perl5/CPAN
+	sed "s#@@VIRTUAL_ENV@@#$PERLENV#g" <<MYCONFIG > $PERLENV/lib/perl5/CPAN/MyConfig.pm
+\$CPAN::Config = {
+  'applypatch' => q[],
+  'auto_commit' => q[0],
+  'build_cache' => q[100],
+  'build_dir' => q[@@VIRTUAL_ENV@@/.cpan/build],
+  'build_dir_reuse' => q[1],
+  'build_requires_install_policy' => q[yes],
+  'bzip2' => q[/bin/bzip2],
+  'cache_metadata' => q[1],
+  'check_sigs' => q[0],
+  'colorize_debug' => q[cyan],
+  'colorize_output' => q[1],
+  'colorize_print' => q[blue],
+  'colorize_warn' => q[red],
+  'commandnumber_in_prompt' => q[1],
+  'cpan_home' => q[@@VIRTUAL_ENV@@/.cpan],
+  'curl' => q[],
+  'ftp' => q[/usr/bin/ftp],
+  'ftp_passive' => q[1],
+  'ftp_proxy' => q[],
+  'getcwd' => q[cwd],
+  'gpg' => q[/usr/bin/gpg],
+  'gzip' => q[/bin/gzip],
+  'histfile' => q[@@VIRTUAL_ENV@@/.cpan/histfile],
+  'histsize' => q[100],
+  'http_proxy' => q[],
+  'inactivity_timeout' => q[0],
+  'index_expire' => q[1],
+  'inhibit_startup_message' => q[0],
+  'keep_source_where' => q[@@VIRTUAL_ENV@@/.cpan/sources],
+  'load_module_verbosity' => q[v],
+  'lynx' => q[],
+  'make' => q[/usr/bin/make],
+  'make_arg' => q[],
+  'make_install_arg' => q[],
+  'make_install_make_command' => q[/usr/bin/make],
+  'makepl_arg' => q[],
+  'mbuild_arg' => q[],
+  'mbuild_install_arg' => q[],
+  'mbuild_install_build_command' => q[./Build],
+  'mbuildpl_arg' => q[],
+  'ncftp' => q[],
+  'ncftpget' => q[],
+  'no_proxy' => q[],
+  'pager' => q[/usr/bin/less -MRS],
+  'patch' => q[/usr/bin/patch],
+  'prefer_installer' => q[MB],
+  'prefs_dir' => q[@@VIRTUAL_ENV@@/.cpan/prefs],
+  'prerequisites_policy' => q[follow],
+  'scan_cache' => q[atstart],
+  'shell' => q[/bin/bash],
+  'show_unparsable_versions' => q[0],
+  'show_upload_date' => q[0],
+  'show_zero_versions' => q[0],
+  'tar' => q[/bin/tar],
+  'tar_verbosity' => q[v],
+  'term_is_latin' => q[0],
+  'term_ornaments' => q[1],
+  'test_report' => q[0],
+  'unzip' => q[],
+  'urllist' => [q[ftp://mirror.internode.on.net/pub/cpan/], q[ftp://cpan.inspire.net.nz/cpan/], q[ftp://cpan.catalyst.net.nz/pub/CPAN/], q[http://cpan.schools.net.au/]],
+  'use_sqlite' => q[0],
+  'wget' => q[/usr/bin/wget],
+  'yaml_load_code' => q[0],
+  'yaml_module' => q[YAML],
+};
+
+1;
+
+__END__
+MYCONFIG
 }
+
+function write_perlish_activate () {
+	PERLENV=$1
+	sed "s#@@VIRTUAL_ENV@@#$PERLENV#g" <<MYACTIVATE > $PERLENV/bin/activate
+# This file must be used with "source bin/activate" *from bash*
+# you cannot run it directly
+
+deactivate () {
+    # reset old environment variables
+    if [ -n "\$_OLD_VIRTUAL_PATH" ] ; then
+        PATH="\$_OLD_VIRTUAL_PATH"
+        export PATH
+        unset _OLD_VIRTUAL_PATH
+    fi
+    if [ -n "\$_OLD_VIRTUAL_PYTHONHOME" ] ; then
+        PYTHONHOME="\$_OLD_VIRTUAL_PYTHONHOME"
+        export PYTHONHOME
+        unset _OLD_VIRTUAL_PYTHONHOME
+    fi
+
+    # This should detect bash and zsh, which have a hash command that must
+    # be called to get it to forget past commands.  Without forgetting
+    # past commands the \$PATH changes we made may not be respected
+    if [ -n "\$BASH" -o -n "\$ZSH_VERSION" ] ; then
+        hash -r
+    fi
+
+    if [ -n "\$_OLD_VIRTUAL_PS1" ] ; then
+        PS1="\$_OLD_VIRTUAL_PS1"
+        export PS1
+        unset _OLD_VIRTUAL_PS1
+    fi
+
+    unset VIRTUAL_ENV
+    unset PERLENV
+    unset PERL5LIB
+    unset MODULEBUILDRC
+    unset PERL_MM_OPT
+    unset PERL_MB_OPT
+    if [ ! "\$1" = "nondestructive" ] ; then
+    # Self destruct!
+        unset -f deactivate
+    fi
+}
+
+# unset irrelavent variables
+deactivate nondestructive
+
+VIRTUAL_ENV="@@VIRTUAL_ENV@@"
+export VIRTUAL_ENV
+
+_OLD_VIRTUAL_PATH="\$PATH"
+PATH="\$VIRTUAL_ENV/bin:\$PATH"
+PERLENV=\$VIRTUAL_ENV
+eval \$(perl -I\${PERLENV}/lib/perl5 -Mlocal::lib=\${PERLENV} -MCPAN)
+export VIRTUAL_ENV PERLENV
+export PATH
+
+# unset PYTHONHOME if set
+# this will fail if PYTHONHOME is set to the empty string (which is bad anyway)
+# could use \`if (set -u; : \$PYTHONHOME) ;\` in bash
+if [ -n "\$PYTHONHOME" ] ; then
+    _OLD_VIRTUAL_PYTHONHOME="\$PYTHONHOME"
+    unset PYTHONHOME
+fi
+
+if [ -z "\$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
+    _OLD_VIRTUAL_PS1="\$PS1"
+    if [ "x" != x ] ; then
+	PS1="\$PS1"
+    else
+    if [ "\`basename \"\$VIRTUAL_ENV\"\`" = "__" ] ; then
+        # special case for Aspen magic directories
+        # see http://www.zetadev.com/software/aspen/
+        PS1="[\`basename \\\`dirname \"\$VIRTUAL_ENV\"\\\`\`] \$PS1"
+    else
+        PS1="(\`basename \"\$VIRTUAL_ENV\"\`)\$PS1"
+    fi
+    fi
+    export PS1
+fi
+
+# This should detect bash and zsh, which have a hash command that must
+# be called to get it to forget past commands.  Without forgetting
+# past commands the \$PATH changes we made may not be respected
+if [ -n "\$BASH" -o -n "\$ZSH_VERSION" ] ; then
+    hash -r
+fi
+MYACTIVATE
+	}
 
 function mkperlvirtualenv () {
 	PERLENV="$WORKON_HOME/$1"
@@ -103,7 +255,17 @@ function mkperlvirtualenv () {
 	verify_workon_home
 	(
 		cd "$WORKON_HOME"
-		virtualenv "$@"
+		mkdir $1
+		mkdir $1/bin
+		mkdir $1/lib
+		mkdir $1/include
+		mkdir $1/man
+		mkdir $1/.cpan
+		write_perlish_activate $PERLENV
+		configure_cpan $PERLENV
+		export PERL5LIB=$PERLENV/lib/perl5:$PERL5LIB
+		export PERL_MB_OPT="--install_base $PERLENV"
+		export PERL_MM_OPT="INSTALL_BASE=$PERLENV"
 		cd $PERLENV
 		wget -O CHECKSUMS $TARBALL_URL/CHECKSUMS
 		[ -f CHECKSUMS ] || exit
@@ -111,14 +273,15 @@ function mkperlvirtualenv () {
 		rm CHECKSUMS
 		echo "Fetching $PACKAGE_NAME"
 		wget -O local-lib.tar.gz "${TARBALL_URL}/${PACKAGE_NAME}"
-		tar xvf local-lib.tar.gz
+		tar xvf local-lib.tar.gz || exit
 		cd local-lib-*
 		[ -f Makefile.PL ] || exit 1
 		perl Makefile.PL --bootstrap="${PERLENV}"
+		configure_cpan $PERLENV
 		make test && make install
 		cd ..
 		rm -rf local-lib*
-		insert_perlish $PERLENV/bin/activate
+		source $1/bin/activate
 		perlbin=`which perl`
 		cat > ${PERLENV}/bin/perl << EOF
 #!/bin/sh
