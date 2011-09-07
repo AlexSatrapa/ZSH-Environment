@@ -255,6 +255,7 @@ function mkperlvirtualenv () {
 	verify_workon_home
 	(
 		cd "$WORKON_HOME"
+		virtualenv "$@" || echo "virtualenv not installed"
 		mkdir $1
 		mkdir $1/bin
 		mkdir $1/lib
@@ -263,6 +264,7 @@ function mkperlvirtualenv () {
 		mkdir $1/.cpan
 		write_perlish_activate $PERLENV
 		configure_cpan $PERLENV
+		PATH=$PERLENV/bin:$PATH
 		export PERL5LIB=$PERLENV/lib/perl5:$PERL5LIB
 		export PERL_MB_OPT="--install_base $PERLENV"
 		export PERL_MM_OPT="INSTALL_BASE=$PERLENV"
@@ -273,7 +275,7 @@ function mkperlvirtualenv () {
 		rm CHECKSUMS
 		echo "Fetching $PACKAGE_NAME"
 		wget -O local-lib.tar.gz "${TARBALL_URL}/${PACKAGE_NAME}"
-		tar xvf local-lib.tar.gz || exit
+		tar xzvf local-lib.tar.gz || exit
 		cd local-lib-*
 		[ -f Makefile.PL ] || exit 1
 		perl Makefile.PL --bootstrap="${PERLENV}"
