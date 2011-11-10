@@ -146,7 +146,7 @@ function configure_cpan {
   'term_ornaments' => q[1],
   'test_report' => q[0],
   'unzip' => q[],
-  'urllist' => [q[ftp://mirror.internode.on.net/pub/cpan/], q[ftp://cpan.inspire.net.nz/cpan/], q[ftp://cpan.catalyst.net.nz/pub/CPAN/], q[http://cpan.schools.net.au/]],
+  'urllist' => [q[ftp://mirror.internode.on.net/pub/cpan/], q[http://cpan.schools.net.au/]],
   'use_sqlite' => q[0],
   'wget' => q[/usr/bin/wget],
   'yaml_load_code' => q[0],
@@ -279,7 +279,6 @@ function mkperlvirtualenv () {
 		cd local-lib-*
 		[ -f Makefile.PL ] || exit 1
 		perl Makefile.PL --bootstrap="${PERLENV}"
-		configure_cpan $PERLENV
 		make test && make install
 		cd ..
 		rm -rf local-lib*
