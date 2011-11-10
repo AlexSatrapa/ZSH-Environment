@@ -147,7 +147,7 @@ function configure_cpan {
   'test_report' => q[0],
   'unzip' => q[],
   'urllist' => [q[ftp://mirror.internode.on.net/pub/cpan/], q[http://cpan.schools.net.au/]],
-  'use_sqlite' => q[0],
+  'use_sqlite' => q[1],
   'wget' => q[/usr/bin/wget],
   'yaml_load_code' => q[0],
   'yaml_module' => q[YAML],
@@ -278,11 +278,11 @@ function mkperlvirtualenv () {
 		tar xzvf local-lib.tar.gz || exit
 		cd local-lib-*
 		[ -f Makefile.PL ] || exit 1
-		perl Makefile.PL --bootstrap="${PERLENV}"
+		perl Makefile.PL
 		make test && make install
 		cd ..
 		rm -rf local-lib*
-		source $1/bin/activate
+		source $PERLENV/bin/activate
 		perlbin=`which perl`
 		cat > ${PERLENV}/bin/perl << EOF
 #!/bin/sh
@@ -295,6 +295,7 @@ EOF
 	update_workon_tab_completion
 	workon $(_lastarg "$@")
 	PERL_MM_USE_DEFAULT=1
+	cpan DBI
 	cpan CPAN::SQLite
 	cpan Digest::SHA
 	cpan Module::Build
