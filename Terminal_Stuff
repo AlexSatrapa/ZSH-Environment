@@ -1,10 +1,10 @@
 # Nifty hint from http://osxdaily.com/2010/09/27/open-any-man-page-in-preview-and-save-as-pdf/
 export PSMAN_CACHE_PATH=~/Library/Caches/psman
 function psman () {
-	TARGET=$1
+	TARGET=$argv[${#}]
 	
 	if [ ! -f $PSMAN_CACHE_PATH/$TARGET.pdf ] ; then
-		man -t $TARGET > $PSMAN_CACHE_PATH/$TARGET.ps
+		man -t $* > $PSMAN_CACHE_PATH/$TARGET.ps
 		if [ ! $? = 0 ] ; then
 			rm -f $PSMAN_CACHE_PATH/$TARGET.ps
 			echo "No manual entry for $TARGET."
