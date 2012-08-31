@@ -212,7 +212,7 @@ export VIRTUAL_ENV
 _OLD_VIRTUAL_PATH="\$PATH"
 PATH="\$VIRTUAL_ENV/bin:\$PATH"
 PERLENV=\$VIRTUAL_ENV
-eval \$(perl -I\${PERLENV}/lib/perl5 -Mlocal::lib=\${PERLENV} -MCPAN)
+eval \$(perl -I\${PERLENV}/lib/perl5 -Mlocal::lib=\${PERLENV})
 export VIRTUAL_ENV PERLENV
 export PATH
 
@@ -247,6 +247,52 @@ if [ -n "\$BASH" -o -n "\$ZSH_VERSION" ] ; then
     hash -r
 fi
 MYACTIVATE
+	}
+
+function perlize_virtual_env () {
+	[ -z "$VIRTUAL_ENV" ] && exit 1
+	TARBALL_URL=http://search.cpan.org/CPAN/authors/id/G/GE/GETTY
+	cd $VIRTUAL_ENV
+	PERLENV=$VIRTUAL_ENV
+	mkdir $VIRTUAL_ENV/bin
+	mkdir $VIRTUAL_ENV/lib
+	mkdir $VIRTUAL_ENV/include
+	mkdir $VIRTUAL_ENV/man
+	mkdir $VIRTUAL_ENV/.cpan
+	write_perlish_activate $PERLENV
+	configure_cpan $PERLENV
+	PATH=$PERLENV/bin:$PATH
+	export PERL5LIB=$PERLENV/lib/perl5:$PERL5LIB
+	export PERL_MB_OPT="--install_base $PERLENV"
+	export PERL_MM_OPT="INSTALL_BASE=$PERLENV"
+	cd $PERLENV
+	wget -O CHECKSUMS $TARBALL_URL/CHECKSUMS
+	[ -f CHECKSUMS ] || exit
+	PACKAGE_NAME=`grep "local-lib.*tar.gz" CHECKSUMS | sed 's#^.*\(local-lib-.*\.tar\.gz\).*$#\1#' | sort | tail -1`
+	rm CHECKSUMS
+	echo "Fetching $PACKAGE_NAME"
+	wget -O local-lib.tar.gz "${TARBALL_URL}/${PACKAGE_NAME}"
+	tar xzvf local-lib.tar.gz || exit
+	cd local-lib-*
+	[ -f Makefile.PL ] || exit 1
+	perl Makefile.PL
+	make test && make install
+	cd ..
+	rm -rf local-lib*
+	source $PERLENV/bin/activate
+	perlbin=`which perl`
+	cat > ${PERLENV}/bin/perl << EOF
+#!/bin/sh
+PERLENV="${PERLENV}"
+${perlbin} -I\$PERLENV/lib/perl5 -Mlocal::lib=\$PERLENV \$@
+EOF
+	chmod 755 $PERLENV/bin/perl
+	rehash
+	PERL_MM_USE_DEFAULT=1
+	cpan DBI
+	cpan CPAN::SQLite
+	cpan Digest::SHA
+	cpan Module::Build
 	}
 
 function mkperlvirtualenv () {
@@ -287,7 +333,7 @@ function mkperlvirtualenv () {
 		cat > ${PERLENV}/bin/perl << EOF
 #!/bin/sh
 PERLENV="${PERLENV}"
-${perlbin} -I\$PERLENV/lib/perl5 -Mlocal::lib=\$PERLENV -MCPAN \$@
+${perlbin} -I\$PERLENV/lib/perl5 -Mlocal::lib=\$PERLENV \$@
 EOF
 		chmod 755 $PERLENV/bin/perl
 		rehash
@@ -324,7 +370,7 @@ function rmvirtualenv () {
 # List the available environments.
 function show_workon_options () {
 	verify_workon_home
-	ls "$WORKON_HOME" | egrep -v '*.egg' | sort
+	ls "$WORKON_HOME" | grep -v '*.egg' | sort
 }
 
 # List or change working virtual environments

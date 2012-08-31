@@ -1,18 +1,35 @@
 # Nifty hint from http://osxdaily.com/2010/09/27/open-any-man-page-in-preview-and-save-as-pdf/
+# Updated with cache handling from http://www.libertypages.com/clarktech/?p=4321
+
 export PSMAN_CACHE_PATH=~/Library/Caches/psman
+
 function psman () {
-	TARGET=$1
+	# If there are no arguments, present a usage message
+	if [ ! $1 ] ; then
+		echo "Usage: $1 [section] name"
+		return
+	fi
+
+	TARGET=$argv[${#}]
+
+	# Check if the man page is newer than the PDF
+	# Get the actual man page (i.e.: man source -> /usr/share/man/man1/builtin.1)
+	MAN_FILE=`man -w $TARGET`
+	# "/usr/share/man/man1/builtin.1" -> "builtin(1)"
+	PAGE_NAME=`basename "$MAN_FILE" | cut -d \. -f 1-2 | sed 's/\./(/' | sed 's/$/)/'`
+	PAGE_FILE="$PSMAN_CACHE_PATH/$PAGE_NAME"
 	
-	if [ ! -f $PSMAN_CACHE_PATH/$TARGET.pdf ] ; then
-		man -t $TARGET > $PSMAN_CACHE_PATH/$TARGET.ps
+	if [ ! -f $PAGE_FILE.pdf -o $MAN_FILE -nt $PAGE_FILE.pdf ] ; then
+		man -t $* > $PAGE_FILE.ps
 		if [ ! $? = 0 ] ; then
-			rm -f $PSMAN_CACHE_PATH/$TARGET.ps
+			rm -f $PAGE_FILE.ps
 			echo "No manual entry for $TARGET."
 			return
 		fi
-		ps2pdf $PSMAN_CACHE_PATH/$TARGET.ps $PSMAN_CACHE_PATH/$TARGET.pdf
+		ps2pdf $PAGE_FILE.ps $PAGE_FILE.pdf
+		rm $PAGE_FILE.ps
 	fi
-	open -a /Applications/Preview.app $PSMAN_CACHE_PATH/$TARGET.pdf
+	open -a /Applications/Preview.app $PAGE_FILE.pdf
 }
 
 # From ZSH mailing list: 'open -a' should provide a list of applications in

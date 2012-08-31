@@ -3,6 +3,7 @@
 
 # Set this to the directory where you installed oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
+export DISABLE_AUTO_UPDATE='true'
 
 if [ -d $ZSH ] ; then
    export ZSH_THEME="alex"
