@@ -40,7 +40,7 @@ function load_agent {
 # Where possible, make sure only one ssh-agent is started
 [ -x `which lockfile` ] || echo "Can't lock $INFOPATH, you might end up with multiple SSH agents"
 case "$TERM" in 
-	nsterm | rxvt | xterm | xterm-color)
+	nsterm | rxvt | xterm* )
 		print -Pn "\e]0;(Waiting)\a"
 		;;
 esac
@@ -48,7 +48,7 @@ esac
 lockfile -2 $INFOPATH.lock
 
 case "$TERM" in 
-	nsterm | rxvt | xterm | xterm-color)
+	nsterm | rxvt | xterm* )
 		print -Pn "\e]0;(Loading SSH agent)\a"
 		;;
 esac
