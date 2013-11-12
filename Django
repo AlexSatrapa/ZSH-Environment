@@ -13,4 +13,4 @@ function django-tests {
 	fi
 }
 
-alias django='./manage.py'
+alias django='python manage.py'
