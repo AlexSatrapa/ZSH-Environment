@@ -9,3 +9,5 @@ if [ -d $ZSH ] ; then
    export ZSH_THEME="alex"
    source $ZSH/oh-my-zsh.sh
 fi
+
+plugins=(git vagrant)

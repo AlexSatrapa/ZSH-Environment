@@ -6,7 +6,7 @@ fi
 
 function add_project {
 	target=$1
-	if [ -h $PROJECTS/$target ] ; then
+	if [ -L $PROJECTS/$target ] ; then
 		project=`/usr/bin/basename $PROJECTS/$target`
 		directory=`/usr/bin/readlink $PROJECTS/$target`
 		hash -d $project=$directory

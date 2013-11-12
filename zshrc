@@ -16,16 +16,15 @@ fi
 OSNAME=`uname`
 
 if [ $OSNAME = 'Darwin' ] ; then
-	alias ls="ls -G -A"
-	alias ll="ls -G -l -A"
-	alias lsl="ls -G -l -A"
+	alias ls="ls -G"
+	alias ll="ls -G -l"
+	alias lsl="ls -G -l"
 else
-	alias ls="ls --color=auto -A"
-	alias ll="ls --color=auto -A -l"
-	alias lsl="ls --color=auto -A -l"
+	alias ls="ls --color=auto"
+	alias ll="ls --color=auto -l"
+	alias lsl="ls --color=auto -l"
 fi
 alias lsd="echo Stop tripping, man!"
-alias sl="echo You want \*ls\*, schmuck."
 alias LS="echo 'TURN CAPS LOCK OFF, YOU EEDIOT!'"
 alias less="less -M"
 alias svndiff='svn diff | colordiff | less -RM'

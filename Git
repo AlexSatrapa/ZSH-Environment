@@ -1,6 +1,6 @@
 function showdiff {
-   git status
-   GIT_EXTERNAL_DIFF="~/.zsh.d/bbedit-diff-driver" git diff
+	git status
+	GIT_EXTERNAL_DIFF="~/.zsh.d/bbedit-diff-driver" git diff
 }
 
 # Inspired by and based on work by J Corbin at
@@ -16,13 +16,19 @@ function switch {
 
 # http://www.jukie.net/~bart/conf/zsh.d/S55_git
 function gitize() {
-   git init \
-   && git add . \
-   && git commit -a -m "Imported into git." \
-   && git gc
+	git init \
+	&& git add . \
+	&& git commit -a -m "Imported into git." \
+	&& git gc
 }
 
 function pullpush {
-   git svn rebase && git svn dcommit
-   maketags
-   }
+	if [ -d .svn -a -d .hg ] ; then
+		svn update
+		hg update
+		svn commit
+	else
+		git svn rebase && git svn dcommit
+	fi
+	maketags
+}
