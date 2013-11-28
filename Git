@@ -14,9 +14,38 @@ function switch {
 	fi
 }
 
+function prepare_gitignore() {
+	cat > .gitignore <<IGNORE
+*.pyc
+.DS_Store
+.svn
+.hg
+tags
+*~
+*~.*
+*.mine
+*.log
+*.bbprojectd
+TODO
+report
+const-local.php
+apache/logs
+apache/httpd.pid
+Build
+_build
+blib
+LICENSE
+MANIFEST
+MYMETA.*
+META.*
+.settings-local
+IGNORE
+}
+
 # http://www.jukie.net/~bart/conf/zsh.d/S55_git
 function gitize() {
 	git init \
+	&& prepare_gitignore \
 	&& git add . \
 	&& git commit -a -m "Imported into git." \
 	&& git gc
