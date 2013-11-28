@@ -10,4 +10,4 @@ if [ -d $ZSH ] ; then
    source $ZSH/oh-my-zsh.sh
 fi
 
-plugins=(git vagrant)
+plugins=(git vagrant osx virtualenvwrapper)
