@@ -2,3 +2,16 @@ function maketags {
    [ -x /usr/bin/bbedit ] && /usr/bin/bbedit --maketags . 2> /dev/null
    [ -x /usr/local/bin/bbedit ] && /usr/local/bin/bbedit --maketags . 2> /dev/null
    }
+
+function newnote {
+	DIR=`pwd`
+	BASE=`basename $DIR`
+	if [ "$BASE" = "Notes" ]; then
+		FILE=`date "+%Y-%m-%d"`.md
+		touch $FILE
+		bbedit $FILE
+	else
+		echo "Not in a Notes directory."
+	fi
+	unset BASE DIR
+	}
