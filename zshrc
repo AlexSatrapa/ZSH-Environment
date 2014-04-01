@@ -40,21 +40,6 @@ fi
 
 export PAGER="/usr/bin/less -MR"
 
-setopt AUTO_LIST
-setopt APPEND_HISTORY
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_VERIFY
-setopt HIST_NO_STORE
-setopt SHARE_HISTORY
-setopt MARK_DIRS
-setopt AUTO_PUSHD
-setopt PUSHD_IGNORE_DUPS
-setopt NO_PUSHD_MINUS
-
-DIRSTACKSIZE=20
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=2000
-SAVEHIST=2000
 if [ $OSNAME = 'Darwin' ] ; then
 	export EDITOR=`which bbedit`" -w --resume"
 	export VISUAL=`which bbedit`" -w --resume"
@@ -76,7 +61,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-for zshrc_snipplet in ~/.zsh.d/[0-9][0-9]*[^~] ; do
-   source $zshrc_snipplet
+for zshrc_snippet in ~/.zsh.d/[0-9][0-9]*[^~] ; do
+   source $zshrc_snippet
 done
 
