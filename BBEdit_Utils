@@ -3,32 +3,47 @@ function maketags {
    [ -x /usr/local/bin/bbedit ] && /usr/local/bin/bbedit --maketags . 2> /dev/null
    }
 
+# Find the nearest "Notes" directory, searching up through the hierarchy.
+# If a Notes directory cannot be found, returns nothing.
+# Takes optional argument which is directory from which to start looking.
 function findnotes {
 	if [ -n "$1" ] ; then
 		DIR=$1
 	else
 		DIR=`pwd`
 	fi
+
 	UP=`dirname $DIR`
 	if [ $UP = / ]; then
 		echo Notes directory not found. 1>&2
 	elif [ -d $DIR/Notes ]; then
-			echo $DIR/Notes
+		echo $DIR/Notes
 	else
 		echo `findnotes $UP`
 	fi
 	unset UP DIR
 	}
 
+# Create a new note in the nearest Notes directory.
+# Takes optional argument which is the directory from which to
+# start looking for a Notes directory (see findnotes).
 function newnote {
-	NOTES=`findnotes`
-	BASE=`basename $NOTES`
-	if [ "$BASE" = "Notes" ]; then
+	NOTES=`findnotes $1`
+	if [ -d "$NOTES" ]; then
 		FILE=`date "+%Y-%m-%d"`.md
 		touch $NOTES/$FILE
 		bbedit $NOTES/$FILE
-	else
-		echo "Not in a Notes directory."
 	fi
-	unset BASE DIR
+	unset NOTES FILE
+	}
+
+# Open the notes collection.
+# Takes optional argument which is the directory from which to
+# start looking for a Notes directory (see findnotes).
+function notes {
+	NOTES=`findnotes $1`
+	if [ -d "$NOTES" ]; then
+		bbedit $NOTES
+	fi
+	unset NOTES
 	}
