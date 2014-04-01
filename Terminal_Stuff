@@ -32,11 +32,30 @@ function psman () {
 	open -a /Applications/Preview.app $PAGE_FILE.pdf
 }
 
-# From ZSH mailing list: 'open -a' should provide a list of applications in
-# /Applications
-function _open() {
-   local -a app_path
-   app_path=(/Applications/*(/))
-   _path_files -W app_path -g '*.app'
-   }
+if [ $OSNAME = 'Darwin' ] ; then
+	alias ls="ls -G"
+	alias ll="ls -G -l"
+	alias lsl="ls -G -l"
+else
+	alias ls="ls --color=auto"
+	alias ll="ls --color=auto -l"
+	alias lsl="ls --color=auto -l"
+fi
+alias lsd="echo Stop tripping, man!"
+alias LS="echo 'TURN CAPS LOCK OFF, YOU EEDIOT!'"
+alias less="less -M"
+alias svndiff='svn diff | colordiff | less -RM'
+export GREP_OPTIONS=--color=auto
+export GREP_COLOR=1
 
+export PAGER="/usr/bin/less -MR"
+
+if [ $OSNAME = 'Darwin' ] ; then
+	export EDITOR=`which bbedit`" -w --resume"
+	export VISUAL=`which bbedit`" -w --resume"
+fi
+
+bindkey -d
+bindkey -e
+# Macintosh "[X>" key ('delete' next to help/end)
+bindkey "^[[3~" delete-char
