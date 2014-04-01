@@ -13,5 +13,5 @@ INSTALLING
 To get started:
  - clone from github: git clone git://github.com/AlexSatrapa/ZSH-Environment.git ~/.zsh.d
  - symlink ~/.zsh.d/zshrc to ~/.zshrc
- - in .zsh.d, symlink all the scripts you want to have active to files with names of the form SXX_Blah where XX is some number 00-99.
+ - in .zsh.d, symlink all the scripts you want to have active to files with names of the form XX_Foo where XX is some number 00-99.
  - source ~/.zshrc

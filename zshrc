@@ -76,7 +76,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-for zshrc_snipplet in ~/.zsh.d/S[0-9][0-9]*[^~] ; do
+for zshrc_snipplet in ~/.zsh.d/[0-9][0-9]*[^~] ; do
    source $zshrc_snipplet
 done
 
