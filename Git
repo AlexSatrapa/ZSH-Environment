@@ -16,8 +16,9 @@ function switch {
 
 function prepare_gitignore() {
 	cat > .gitignore <<IGNORE
-*.pyc
+.AppleDouble
 .DS_Store
+*.pyc
 .svn
 .hg
 tags
