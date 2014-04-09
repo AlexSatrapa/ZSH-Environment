@@ -32,6 +32,7 @@ function newnote {
 	if [ -d "$NOTES" ]; then
 		FILE=`date "+%Y-%m-%d"`.md
 		touch $NOTES/$FILE
+		bbedit $NOTES
 		bbedit $NOTES/$FILE
 	fi
 	unset NOTES FILE
