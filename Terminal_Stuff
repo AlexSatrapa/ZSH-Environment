@@ -33,9 +33,9 @@ function psman () {
 }
 
 if [ $OSNAME = 'Darwin' ] ; then
-	alias ls="ls -G"
-	alias ll="ls -G -l"
-	alias lsl="ls -G -l"
+	alias ls="ls -fG"
+	alias ll="ls -fG -l"
+	alias lsl="ls -fG -l"
 else
 	alias ls="ls --color=auto"
 	alias ll="ls --color=auto -l"
