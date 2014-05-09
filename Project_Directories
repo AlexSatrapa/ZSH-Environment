@@ -7,14 +7,13 @@ fi
 function add_project {
 	target=$1
 	if [ -L $PROJECTS/$target ] ; then
-		project=`/usr/bin/basename $PROJECTS/$target`
 		directory=`/usr/bin/readlink $PROJECTS/$target`
-		hash -d $project=$directory
+		hash -d $target=$directory
 		fi
 	}
 
 if [ -d $PROJECTS ] ; then
-	ls -1 $PROJECTS | while read target; do
+	for target in $PROJECTS/*; do
 		add_project $target
 		done
 	hash -d projects=$PROJECTS
