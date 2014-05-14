@@ -8,7 +8,7 @@ function add_project {
 	target=$1
 	if [ -L $PROJECTS/$target ] ; then
 		directory=`/usr/bin/readlink $PROJECTS/$target`
-		hash -d $target=$directory
+		eval $target='$directory'
 		fi
 	}
 
@@ -16,7 +16,7 @@ if [ -d $PROJECTS ] ; then
 	for target in $PROJECTS/*; do
 		add_project $target
 		done
-	hash -d projects=$PROJECTS
+	projects=$PROJECTS
 else
 	echo "No projects directory '$PROJECTS'"
 fi
