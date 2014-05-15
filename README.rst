@@ -7,6 +7,11 @@ It is by no means complete. Please feel free to contribute your changes.
 
 Alex Satrapa <grail@goldweb.com.au>
 
+DEPENDENCIES
+============
+
+FIXME: On the Mac, you are expected to have MacPorts installed. This is mainly so I can use the shortcut to find where the virtualenvwrapper.sh for the currently installed Python is located. At some later point in time I'll update this to find where virtualenvwrapper.sh is installed, and preferably not be fragile about it.
+
 INSTALLING
 ==========
 
