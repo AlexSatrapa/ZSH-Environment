@@ -14,6 +14,8 @@ function switch {
 	fi
 }
 
+# Kitchen-sink gitignore.
+# I prepared this to cover all kinds of crud, mainly to protect me from myself.
 function prepare_gitignore() {
 	cat > .gitignore <<IGNORE
 .AppleDouble
