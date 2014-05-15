@@ -41,7 +41,7 @@ function load_agent {
 [ -x `which lockfile` ] || echo "Can't lock $INFOPATH, you might end up with multiple SSH agents"
 case "$TERM" in 
 	nsterm | rxvt | xterm* )
-		print -Pn "\e]0;(Waiting)\a"
+		print -Pn "\e]0;(Waiting on SSH agent)\a"
 		;;
 esac
 
@@ -59,6 +59,8 @@ if [ ! -z "$SSH_AUTH_SOCK" ] ; then
 	if ([ "`ssh-add -l 2>&1`" = "Could not open a connection to your authentication agent." ]) ; then
 		echo "No answer from SSH_AUTH_SOCK, trying pre-defined agent."
 		. $INFOPATH
+	else
+		echo "SSH auth via $SSH_AUTH_SOCK."
 	fi
 # See if we've got a pre-defined SSH agent
 elif [ -f $INFOPATH ] ; then
@@ -80,11 +82,11 @@ fi
 if ([ "`ssh-add -l`" = "The agent has no identities." ]) ; then
 	ssh-add
 fi
-rm -f $INFOPATH.lock
 
+# Clean up
+rm -f $INFOPATH.lock
 case "$TERM" in 
 	nsterm | rxvt | xterm | xterm-color)
 		print -Pn "\e]0;(SSH agent loaded)\a"
 		;;
 esac
-# SSH agent script ends
