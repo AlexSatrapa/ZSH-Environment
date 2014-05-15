@@ -296,18 +296,20 @@ EOF
 	}
 
 function mkperlvirtualenv () {
-	PERLENV="$WORKON_HOME/$1"
+	eval "venv_name=\${$#}"
+	echo $venv_name
 	TARBALL_URL=http://search.cpan.org/CPAN/authors/id/G/GE/GETTY
 	verify_workon_home
 	(
 		cd "$WORKON_HOME"
-		virtualenv "$@" || echo "virtualenv not installed"
-		mkdir $1
-		mkdir $1/bin
-		mkdir $1/lib
-		mkdir $1/include
-		mkdir $1/man
-		mkdir $1/.cpan
+		virtualenv $@ || echo "virtualenv not installed"
+		PERLENV="$WORKON_HOME/$venv_name"
+		mkdir $venv_name
+		mkdir $venv_name/bin
+		mkdir $venv_name/lib
+		mkdir $venv_name/include
+		mkdir $venv_name/man
+		mkdir $venv_name/.cpan
 		write_perlish_activate $PERLENV
 		configure_cpan $PERLENV
 		PATH=$PERLENV/bin:$PATH
