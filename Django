@@ -3,11 +3,12 @@ function manage_options() {
    }
 compctl -g "`manage_options`" django
 
+# Run tests and create a git branch named after the current timestamp if the tests passed.
 function django-tests {
 	[ -x ./manage.py ] || return 1
 	./manage.py test $1
 	if [ "$?" -eq "0" ] ; then
-		DSTAMP=`date +%F\ %H:%M:%S`
+		DSTAMP=`date +%Y%m%dT%H%M%S`
 		git commit -am "Automatically committing after successful testing at $DSTAMP"
 		git diff @{1}
 	fi
