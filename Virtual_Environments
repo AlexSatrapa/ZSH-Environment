@@ -3,10 +3,12 @@
 if [ "$WORKON_HOME" = "" ] ; then
 	if [ "$OSNAME" = 'Darwin' ] ; then
 		WORKON_HOME=$HOME/Library/VirtualEnvironments
+		VIRTUALENVWRAPPER_HOOK_DIR=$HOME/Library/VirtualEnvironmentHooks
 	else
 		WORKON_HOME=$HOME/.virtualenvs
+		VIRTUALENVWRAPPER_HOOK_DIR=WORKON_HOME
 	fi
-	export WORKON_HOME
+	export WORKON_HOME VIRTUALENVWRAPPER_HOOK_DIR
 fi
 
 if [ ! -d "$WORKON_HOME" ] ; then
