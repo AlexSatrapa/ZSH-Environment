@@ -14,7 +14,8 @@ function add_project {
 
 if [ -d $PROJECTS ] ; then
 	for target in $PROJECTS/*; do
-		add_project $target
+		project=`basename $target`
+		add_project $project
 		done
 	projects=$PROJECTS
 else
