@@ -26,6 +26,7 @@ function prepare_gitignore() {
 tags
 *~
 *~.*
+*.swp
 *.mine
 *.log
 *.bbprojectd
