@@ -12,4 +12,5 @@ function commit(){
 		fi
 		~/Applications/logtodayone "@$GIT_DIR $msg" && git commit -am "$msg"
 	fi
+	unset msg this_path GIT_DIR
 }
