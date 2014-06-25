@@ -10,6 +10,6 @@ function commit(){
 			this_path=$(pwd)
 			GIT_DIR=${this_path##*/}
 		fi
-		~/Applications/logtodayone "@$GIT_DIR $msg" && git commit -am "$msg"
+		~/Applications/logtodayone "#$GIT_DIR $msg" && git commit -am "$msg"
 	fi
 }
