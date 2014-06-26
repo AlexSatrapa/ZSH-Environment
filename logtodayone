@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/opt/local/bin/ruby
 
 # logtodayone.rb
 # Brett Terpstra (http://brettterpstra.com)

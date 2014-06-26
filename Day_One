@@ -17,4 +17,5 @@ function commit(){
 		COMMIT_MESSAGE="#$GIT_DIR$BRANCH_MESSAGE: $msg"
 		~/Applications/logtodayone "$COMMIT_MESSAGE" && git commit -am "$msg"
 	fi
+	unset msg this_path GIT_DIR
 }
