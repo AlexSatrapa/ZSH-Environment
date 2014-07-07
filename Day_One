@@ -10,7 +10,12 @@ function commit(){
 			this_path=$(pwd)
 			GIT_DIR=${this_path##*/}
 		fi
-		~/Applications/logtodayone "@$GIT_DIR $msg" && git commit -am "$msg"
+		GIT_BRANCH=$(parse_git_branch)
+		if [ ! -z $GIT_BRANCH ] ; then
+			BRANCH_MESSAGE=" (on $GIT_BRANCH)"
+		fi
+		COMMIT_MESSAGE="#$GIT_DIR$BRANCH_MESSAGE: $msg"
+		~/Applications/logtodayone "$COMMIT_MESSAGE" && git commit -am "$msg"
 	fi
 	unset msg this_path GIT_DIR
 }
