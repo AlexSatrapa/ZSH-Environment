@@ -36,6 +36,7 @@ if [ $OSNAME = 'Darwin' ] ; then
 	alias ls="ls -fG"
 	alias ll="ls -fG -l"
 	alias lsl="ls -fG -l"
+	alias rsync="rsync --xattrs" # Preserve xattrs, http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
 else
 	alias ls="ls --color=auto"
 	alias ll="ls --color=auto -l"
