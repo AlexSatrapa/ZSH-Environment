@@ -46,6 +46,13 @@ META.*
 IGNORE
 }
 
+# See http://www.gitignore.io/ for details
+# Generates gitignore file content based on OS/language
+# For an example, run "gi osx,python"
+function gi() {
+	curl http://www.gitignore.io/api/$@ ;
+	}
+
 # http://www.jukie.net/~bart/conf/zsh.d/S55_git
 function gitize() {
 	git init \
