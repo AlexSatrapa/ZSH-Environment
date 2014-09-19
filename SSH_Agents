@@ -26,6 +26,11 @@ STOREPATH=$HOME/.ssh/hosts      # Directory to store details in
 [ -z "$HOSTNAME" ] && HOSTNAME = 'default'
 INFOPATH=$STOREPATH/$HOSTNAME   # Details for this host
 
+function store_ssh_agent_details {
+	echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > $INFOPATH
+	echo "export SSH_AUTH_SOCK" >> $INFOPATH
+	}
+
 function load_agent {
 	# Start the SSH agent up
 	ssh-agent -s > $INFOPATH
@@ -61,6 +66,7 @@ if [ ! -z "$SSH_AUTH_SOCK" ] ; then
 		. $INFOPATH
 	else
 		echo "SSH auth via $SSH_AUTH_SOCK."
+		store_ssh_agent_details
 	fi
 # See if we've got a pre-defined SSH agent
 elif [ -f $INFOPATH ] ; then
