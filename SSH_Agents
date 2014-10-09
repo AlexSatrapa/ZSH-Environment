@@ -85,10 +85,6 @@ else
 	load_agent
 fi
 
-if ([ "`ssh-add -l`" = "The agent has no identities." ]) ; then
-	ssh-add
-fi
-
 # Clean up
 rm -f $INFOPATH.lock
 case "$TERM" in 
