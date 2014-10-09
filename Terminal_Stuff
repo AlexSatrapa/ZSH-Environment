@@ -14,7 +14,7 @@ function psman () {
 
 	# Check if the man page is newer than the PDF
 	# Get the actual man page (i.e.: man source -> /usr/share/man/man1/builtin.1)
-	MAN_FILE=`man -w $TARGET`
+	MAN_FILE=`man -w $@`
 	# "/usr/share/man/man1/builtin.1" -> "builtin(1)"
 	PAGE_NAME=`basename "$MAN_FILE" | cut -d \. -f 1-2 | sed 's/\./(/' | sed 's/$/)/'`
 	PAGE_FILE="$PSMAN_CACHE_PATH/$PAGE_NAME"
