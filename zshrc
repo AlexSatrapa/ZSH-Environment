@@ -1,7 +1,7 @@
 #
 # Alex's ZSH environment
 #
-#  vim: ts=3 sw=3 noet 
+#  vim: ts=3 sw=3 noet
 #
 
 uptime
@@ -35,4 +35,3 @@ compinit
 for zshrc_snippet in ~/.zsh.d/[0-9][0-9]*[^~] ; do
    source $zshrc_snippet
 done
-
