@@ -1,15 +1,13 @@
 # -*- mode: shell-script -*-
 
-if [ "$WORKON_HOME" = "" ] ; then
-	if [ "$OSNAME" = 'Darwin' ] ; then
-		WORKON_HOME=$HOME/Library/VirtualEnvironments
-		VIRTUALENVWRAPPER_HOOK_DIR=$HOME/Library/VirtualEnvironmentHooks
-	else
-		WORKON_HOME=$HOME/.virtualenvs
-		VIRTUALENVWRAPPER_HOOK_DIR=WORKON_HOME
-	fi
-	export WORKON_HOME VIRTUALENVWRAPPER_HOOK_DIR
+if [ "$OSNAME" = 'Darwin' ] ; then
+	WORKON_HOME=$HOME/Library/VirtualEnvironments
+	VIRTUALENVWRAPPER_HOOK_DIR=$HOME/Library/VirtualEnvironmentHooks
+else
+	WORKON_HOME=$HOME/.virtualenvs
+	VIRTUALENVWRAPPER_HOOK_DIR=WORKON_HOME
 fi
+export WORKON_HOME VIRTUALENVWRAPPER_HOOK_DIR
 
 if [ ! -d "$WORKON_HOME" ] ; then
 	echo "ERROR: Virtual environments directory '$WORKON_HOME' does not exist."
