@@ -2,7 +2,7 @@
 # https://github.com/robbyrussell/oh-my-zsh
 
 # Set this to the directory where you installed oh-my-zsh
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/Documents/src/OhMyZSH
 export DISABLE_AUTO_UPDATE='true'
 
 plugins=(git vagrant osx virtualenvwrapper themes)
