@@ -8,6 +8,8 @@ else
 	VIRTUALENVWRAPPER_HOOK_DIR=WORKON_HOME
 fi
 export WORKON_HOME VIRTUALENVWRAPPER_HOOK_DIR
+export VIRTUALENVWRAPPER_PYTHON=`which python`
+export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
 
 if [ ! -d "$WORKON_HOME" ] ; then
 	echo "ERROR: Virtual environments directory '$WORKON_HOME' does not exist."
