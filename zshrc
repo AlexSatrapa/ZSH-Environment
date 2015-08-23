@@ -32,6 +32,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-for zshrc_snippet in ~/.zsh.d/[0-9][0-9]*[^~] ; do
+for zshrc_snippet in ~/.config/zsh.d/[0-9][0-9]*[^~] ; do
    source $zshrc_snippet
 done
