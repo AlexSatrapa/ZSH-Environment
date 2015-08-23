@@ -6,6 +6,7 @@ if [ "$OSNAME" = 'Darwin' ] ; then
 else
 	WORKON_HOME=$HOME/.virtualenvs
 	VIRTUALENVWRAPPER_HOOK_DIR=WORKON_HOME
+	source /etc/bash_completion.d/virtualenvwrapper.sh
 fi
 export WORKON_HOME VIRTUALENVWRAPPER_HOOK_DIR
 
@@ -13,6 +14,5 @@ if [ ! -d "$WORKON_HOME" ] ; then
 	echo "ERROR: Virtual environments directory '$WORKON_HOME' does not exist."
 fi
 
-source /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin/virtualenvwrapper.sh
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
