@@ -1,0 +1,44 @@
+# Find the nearest "Notes" directory, searching up through the hierarchy.
+# If a Notes directory cannot be found, returns nothing.
+# Takes optional argument which is directory from which to start looking.
+function findnotes {
+	if [ -n "$1" ] ; then
+		DIR=$1
+	else
+		DIR=`pwd`
+	fi
+
+	UP=`dirname $DIR`
+	if [ $UP = / ]; then
+		echo Notes directory not found. 1>&2
+	elif [ -d $DIR/Notes ]; then
+		echo $DIR/Notes
+	else
+		echo `findnotes $UP`
+	fi
+	unset UP DIR
+	}
+
+# Create a new note in the nearest Notes directory.
+# Takes optional argument which is the directory from which to
+# start looking for a Notes directory (see findnotes).
+function newnote {
+	NOTES=`findnotes $1`
+	if [ -d "$NOTES" ]; then
+		FILE=`date "+%Y-%m-%d %H%M"`.md
+		touch $NOTES/$FILE
+		open $NOTES/$FILE
+	fi
+	unset NOTES FILE
+	}
+
+# Open the notes collection.
+# Takes optional argument which is the directory from which to
+# start looking for a Notes directory (see findnotes).
+function notes {
+	NOTES=`findnotes $1`
+	if [ -d "$NOTES" ]; then
+		open $NOTES
+	fi
+	unset NOTES
+	}
