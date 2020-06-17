@@ -1,4 +1,0 @@
-function maketags {
-   [ -x /usr/bin/bbedit ] && /usr/bin/bbedit --maketags . 2> /dev/null
-   [ -x /usr/local/bin/bbedit ] && /usr/local/bin/bbedit --maketags . 2> /dev/null
-   }
