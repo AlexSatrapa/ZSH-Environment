@@ -46,6 +46,28 @@ META.*
 IGNORE
 }
 
+function prepare_editorconfig() {
+	cat > .editorconfig <<CONFIG
+# EditorConfig: https://EditorConfig.org
+root = true
+
+[*]
+indent_style = tab
+indent_size = 3
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+[*.py]
+# PEP8
+indent_style = space
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+CONFIG
+}
+
 # See http://www.gitignore.io/ for details
 # Generates gitignore file content based on OS/language
 # For an example, run "gi osx,python"
@@ -57,8 +79,9 @@ function gi() {
 function gitize() {
 	git init \
 	&& prepare_gitignore \
+	&& prepare_editorconfig \
 	&& git add . \
-	&& git commit -a -m "Imported into git." \
+	&& git commit -a -m "Initialised an empty repository." \
 	&& git gc
 }
 
