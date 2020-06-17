@@ -5,9 +5,13 @@
 export ZSH=$HOME/Documents/GitHub/OhMyZSH
 export DISABLE_AUTO_UPDATE='true'
 
-plugins=(git vagrant osx virtualenvwrapper themes)
+export plugins=(git vagrant osx virtualenvwrapper themes scd earth)
 
 if [ -d $ZSH ] ; then
-   export ZSH_THEME="alex"
+   export ZSH_THEME="spaceship"
+   SPACESHIP_RPROMPT_ORDER=( user dir host git hg package node ruby elm elixir xcode swift golang php rust haskell julia docker aws venv conda pyenv dotnet ember kubectl terraform exec_time )
+   SPACESHIP_PROMPT_ORDER=( time vi_mode jobs char )
+   SPACESHIP_TIME_FORMAT='%D{%H:%M}'
+   SPACESHIP_TIME_SHOW=true
    source $ZSH/oh-my-zsh.sh
 fi
