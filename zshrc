@@ -7,9 +7,7 @@
 uptime
 
 if [ -z "$HOSTNAME" ] ; then
-	echo -n "Checking hostname ..."
 	HOSTNAME=`/bin/hostname -s`
-	echo " name is $HOSTNAME."
 	export HOSTNAME
 fi
 

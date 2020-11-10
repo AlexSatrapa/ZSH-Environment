@@ -5,7 +5,8 @@
 export ZSH=$HOME/Documents/GitHub/OhMyZSH
 export DISABLE_AUTO_UPDATE='true'
 
-export plugins=(git vagrant osx virtualenvwrapper themes scd earth)
+export plugins=(git vagrant osx virtualenvwrapper themes scd earth setenv keychain)
+zstyle :omz:plugins:keychain agents ssh
 
 if [ -d $ZSH ] ; then
    export ZSH_THEME="spaceship"
