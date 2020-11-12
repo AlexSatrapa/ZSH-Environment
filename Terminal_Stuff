@@ -33,10 +33,11 @@ function psman () {
 }
 
 if [ $OSNAME = 'Darwin' ] ; then
-	alias ls="ls -aG"
-	alias ll="ls -aG -l"
-	alias lsl="ls -aG -l"
-	alias rsync="rsync --xattrs" # Preserve xattrs, http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
+	alias ls="ls -AG"
+	alias ll="ls -AG -l"
+	alias lsl="ls -AG -l"
+	# Preserve xattrs in rsync, http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
+	[ -x /opt/local/bin/rsync ] && alias rsync="/opt/local/bin/rsync --xattrs"
 else
 	alias ls="ls --color=auto"
 	alias ll="ls --color=auto -l"
