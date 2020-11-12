@@ -136,7 +136,9 @@ function white_terminal
 
 function pink_terminal
 {
-	theme ponies
+	SPACESHIP_CHAR_COLOR_SUCCESS=188
+	SPACESHIP_CHAR_COLOR_FAILURE=203
+	SPACESHIP_TIME_COLOR=188
 }
 
 case "$TERM" in
