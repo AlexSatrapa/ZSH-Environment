@@ -10,7 +10,11 @@ function findnotes {
 
 	UP=`dirname $DIR`
 	if [ $UP = / ]; then
-		echo Notes directory not found. 1>&2
+		if [ -d $HOME/Documents/Notes ]; then
+			echo $HOME/Documents/Notes
+		else
+			echo Notes directory not found. 1>&2
+		fi
 	elif [ -d $DIR/Notes ]; then
 		echo $DIR/Notes
 	else
@@ -39,6 +43,14 @@ function notes {
 	NOTES=`findnotes $1`
 	if [ -d "$NOTES" ]; then
 		open $NOTES
+	fi
+	unset NOTES
+	}
+
+function notes_list {
+	NOTE=`findnotes $1`
+	if [ -d "$NOTES" ]; then
+		ls $NOTES
 	fi
 	unset NOTES
 	}
