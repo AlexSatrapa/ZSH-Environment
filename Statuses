@@ -5,3 +5,4 @@ if [ -n "$DISPLAY" ] ; then
 else
 	echo "is DISABLED!"
 fi
+

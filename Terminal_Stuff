@@ -61,3 +61,4 @@ bindkey -d
 bindkey -e
 # Macintosh "[X>" key ('delete' next to help/end)
 bindkey "^[[3~" delete-char
+

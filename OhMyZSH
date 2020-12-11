@@ -16,3 +16,4 @@ if [ -d $ZSH ] ; then
    SPACESHIP_TIME_SHOW=true
    source $ZSH/oh-my-zsh.sh
 fi
+

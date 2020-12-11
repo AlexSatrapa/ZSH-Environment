@@ -54,3 +54,4 @@ function notes_list {
 	fi
 	unset NOTES
 	}
+
