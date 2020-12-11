@@ -20,16 +20,6 @@ if [ -d $HOME/Applications ] ; then
 	PATH=$PATH:$HOME/Applications
 fi
 
-# The following lines were added by compinstall
-
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' matcher-list '+r:|[. _ -]=** r:|=**'
-zstyle :compinstall filename '/Users/alex/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
 for zshrc_snippet in ~/.zsh.d/[0-9][0-9]*[^~] ; do
    source $zshrc_snippet
 done
