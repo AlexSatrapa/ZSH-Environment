@@ -20,3 +20,5 @@ To get started:
  - symlink ~/.zsh.d/zshrc to ~/.zshrc
  - in .zsh.d, symlink all the scripts you want to have active to files with names of the form XX_Foo where XX is some number 00-99.
  - source ~/.zshrc
+
+NB: instead of ~/.zsh.d I like to use ~/Documents/GitHub/ZSH-Environment, and edit the zshrc script appropriately.
