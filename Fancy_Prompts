@@ -1,39 +1,6 @@
-# One day I'll have a funky prompt like Steve Losh:
-# http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+# Use Oh My ZSH for fancy prompts.
+# All I do here now is change colours for `ls` based on the colour of my terminal
 
-function settitle
-{
-	print -Pn "\e]0;$1\a"
-	return 0
-}
-
-function twolineprompt
-{
-	# Generate two-line command prompt
-	PS1=`echo "%{\\e[$1m[%n@%m:%~]\\e[0m\n\\e[$2m%}%D{%k:%M} [%?|%!]%#%{\\e[0m%} "`
-	unset RPROMPT
-	return 0
-}
-
-function funkyprompt
-{
-	RPROMPT=`echo "\\e[$1m<<%n@%m:%~\\e[0m"`
-	PS1=`echo "%{\\e[$2m%}%D{%k:%M} [%?|%!]%#%{\\e[0m%} "`
-	return 0
-}
-
-# I often like using shortprompt '41;37;1'
-function shortprompt
-{
-	PS1=`echo "%{\\e[$1m%}%T [%?|%!]%#%{\\e[0m%} "`
-	return 0
-}
-
-function invshort
-{
-	shortprompt '41;37;1'
-	return 0
-}
 unset LSCOLORS
 unset LS_COLORS
 # LSCOLORS see 'ls' man page
