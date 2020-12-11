@@ -84,17 +84,6 @@ function gitize() {
 	&& git gc
 }
 
-function pullpush {
-	if [ -d .svn -a -d .hg ] ; then
-		svn update
-		hg update
-		svn commit
-	else
-		git svn rebase && git svn dcommit
-	fi
-	maketags
-}
-
 function parse_git_branch {
 	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/"
 }
