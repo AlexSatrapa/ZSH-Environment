@@ -70,8 +70,8 @@ function black_terminal
 function custom_grass_terminal
 {
 	#               ddllssppxxbbccuuggwwoo
-	export LSCOLORS=dxcxfxexgxdbdeagabafae
-	export LS_COLORS='di=33;40:ln=32;40:so=35;40:pi=34;40:ex=36:bd=33;41:cd=33;44:su=0;46:sg=0;41:tw=0;45:ow=0;44:'
+	export LSCOLORS=GxfxcxdxcxeggdHbaghchd
+	export LS_COLORS='di=1;36:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=36;43:su=1;37;41:sg=30;46:tw=37;42:ow=37;43'
 	export RPROMPT_COLOUR=32
 }
 
@@ -108,30 +108,3 @@ function pink_terminal
 	SPACESHIP_TIME_COLOR=188
 }
 
-case "$TERM" in
-	nsterm | rxvt | xterm | xterm-color | xterm-256color)
-		# Use window titlebar to display some information
-		settitle "%n@%m: %~"
-		# Disable oh-my-zsh titles
-		export DISABLE_AUTO_TITLE=true
-		# Display the new directory when changing directories
-		precmd ()  {
-			# See "Prompt Expansion" esp. %(x.true-text.false-text)
-			settitle "%n@%m: %5(~:%-1~/…/%3~:%~)"
-		}
-		preexec () { settitle "%n@%m: %5(~:%-1~/…/%3~:%~) - $1" }
-		black_terminal
-		;;
-	ansi)
-		unfunction precmd
-		unfunction preexec
-		black_terminal
-		;;
-	*)
-		unfunction precmd
-		unfunction preexec
-		black_terminal
-		# Generate safe prompt
-		PS1="[%?|%!]-[%n@%m: %~]%# "
-		;;
-esac
