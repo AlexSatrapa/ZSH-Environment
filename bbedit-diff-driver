@@ -1,5 +1,0 @@
-#!/bin/sh
-if [ -f "$2" ] && [ -f "$5" ]; then
-	bbdiff --wait --resume "$5" "$2"
-fi
-exit 0

@@ -29,7 +29,8 @@ function psman () {
 		ps2pdf $PAGE_FILE.ps $PAGE_FILE.pdf
 		rm $PAGE_FILE.ps
 	fi
-	open -a /Applications/Preview.app $PAGE_FILE.pdf
+	[ -e /Applications/Preview.app ] && open -a /Applications/Preview.app $PAGE_FILE.pdf && return
+	[ -e /System/Applications/Preview.app ] && open -a /System/Applications/Preview.app $PAGE_FILE.pdf && return
 }
 
 if [ $OSNAME = 'Darwin' ] ; then
