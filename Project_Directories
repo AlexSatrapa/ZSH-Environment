@@ -9,7 +9,7 @@ function add_project {
 	if [ ! -n $1 ]; then
 		return 1
 	fi
-	ln -s $PWD $PROJECTS/$project_name
+	ln -s $PWD "$PROJECTS/$project_name"
 	hash -d -- $project_name="$PWD"
 }
 
