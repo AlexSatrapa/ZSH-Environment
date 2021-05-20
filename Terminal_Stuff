@@ -37,6 +37,7 @@ if [ $OSNAME = 'Darwin' ] ; then
 	alias ls="ls -AG"
 	alias ll="ls -AG -l"
 	alias lsl="ls -AG -l"
+	alias jsonpp='json_pp -json_opt pretty,utf8'
 	# Preserve xattrs in rsync, http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
 	[ -x /opt/local/bin/rsync ] && alias rsync="/opt/local/bin/rsync --xattrs"
 else
