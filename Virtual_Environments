@@ -1,8 +1,8 @@
 # -*- mode: shell-script -*-
 
 if [ "$OSNAME" = 'Darwin' ] ; then
-	WORKON_HOME=$HOME/Library/VirtualEnvironments
-	VIRTUALENVWRAPPER_HOOK_DIR=$HOME/Library/VirtualEnvironmentHooks
+	WORKON_HOME=$HOME/Library/Python/VirtualEnvironments
+	VIRTUALENVWRAPPER_HOOK_DIR=$HOME/Library/Python/VirtualEnvironmentHooks
 else
 	WORKON_HOME=$HOME/.virtualenvs
 	VIRTUALENVWRAPPER_HOOK_DIR=WORKON_HOME
