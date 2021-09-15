@@ -8,17 +8,17 @@ function findnotes {
 		DIR=`pwd`
 	fi
 
-	UP=`dirname $DIR`
+	UP=`dirname "$DIR"`
 	if [ $UP = / ]; then
-		if [ -d $HOME/Documents/Notes ]; then
-			echo $HOME/Documents/Notes
+		if [ -d "$HOME/Documents/Notes" ]; then
+			echo "$HOME/Documents/Notes"
 		else
 			echo Notes directory not found. 1>&2
 		fi
-	elif [ -d $DIR/Notes ]; then
-		echo $DIR/Notes
+	elif [ -d "$DIR/Notes" ]; then
+		echo "$DIR/Notes"
 	else
-		echo `findnotes $UP`
+		echo `findnotes "$UP"`
 	fi
 	unset UP DIR
 	}
@@ -27,11 +27,29 @@ function findnotes {
 # Takes optional argument which is the directory from which to
 # start looking for a Notes directory (see findnotes).
 function newnote {
-	NOTES=`findnotes $1`
+	NOTES=`findnotes "$1"`
 	if [ -d "$NOTES" ]; then
 		FILE=`date "+%Y-%m-%d %H%M"`.md
-		touch $NOTES/$FILE
-		open $NOTES/$FILE
+		touch "$NOTES/$FILE"
+		open "$NOTES/$FILE"
+	fi
+	unset NOTES FILE
+	}
+
+# Create a new note with a specific name.
+# Takes an argument which is the name of the new note.
+# Takes an optional second argument which is the directory from
+# which to start looking.
+function namednote {
+	NOTES=`findnotes "$2"`
+	if [ -d "$NOTES" ]; then
+		if [ -n "$1" ]; then
+			FILE=$1.md
+		else
+			FILE=`date "+%Y-%m-%d %H%M"`.md
+		fi
+		touch "$NOTES/$FILE"
+		open "$NOTES/$FILE"
 	fi
 	unset NOTES FILE
 	}
@@ -40,17 +58,17 @@ function newnote {
 # Takes optional argument which is the directory from which to
 # start looking for a Notes directory (see findnotes).
 function notes {
-	NOTES=`findnotes $1`
+	NOTES=`findnotes "$1"`
 	if [ -d "$NOTES" ]; then
-		open $NOTES
+		open "$NOTES"
 	fi
 	unset NOTES
 	}
 
 function notes_list {
-	NOTE=`findnotes $1`
+	NOTES=`findnotes "$1"`
 	if [ -d "$NOTES" ]; then
-		ls $NOTES
+		ls "$NOTES"
 	fi
 	unset NOTES
 	}
