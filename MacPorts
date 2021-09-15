@@ -1,2 +1,8 @@
 PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
+# Add the following to /private/etc/sudoers.d
+#
+# User_Alias MACPORTSADMIN = alex
+# Cmnd_Alias MACPORTSUPDATE = /opt/local/bin/port selfupdate, /optlocal/bin/port upgrade outdated
+# Runas_Alias MACPORTRUNNERS = root, operator
+# MACPORTSADMIN ALL=(MACPORTRUNNERS) NOPASSWD:MACPORTSUPDATE
