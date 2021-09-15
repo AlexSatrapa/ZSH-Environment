@@ -14,13 +14,8 @@ function switch {
 	fi
 }
 
-# Kitchen-sink gitignore.
-# I prepared this to cover all kinds of crud, mainly to protect me from myself.
 function prepare_gitignore() {
 	cat > .gitignore <<IGNORE
-.AppleDouble
-.DS_Store
-*.pyc
 .svn
 .hg
 tags
@@ -31,18 +26,6 @@ tags
 *.log
 *.bbprojectd
 TODO
-report
-const-local.php
-apache/logs
-apache/httpd.pid
-Build
-_build
-blib
-LICENSE
-MANIFEST
-MYMETA.*
-META.*
-.settings-local
 IGNORE
 }
 
@@ -72,12 +55,12 @@ CONFIG
 # Generates gitignore file content based on OS/language
 # For an example, run "gi osx,python"
 function gi() {
-	curl https://www.toptal.com/developers/gitignore/api/$@ ;
+	curl https://www.toptal.com/developers/gitignore/api/$@ -o .gitignore;
 	}
 
 function gitize() {
 	git init \
-	&& prepare_gitignore \
+	&& gi $@ \
 	&& prepare_editorconfig \
 	&& git add . \
 	&& git commit -a -m "Initialised an empty repository." \
