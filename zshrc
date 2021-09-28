@@ -1,8 +1,4 @@
-#
 # Alex's ZSH environment
-#
-#  vim: ts=3 sw=3 noet
-#
 
 uptime
 
