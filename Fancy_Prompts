@@ -1,5 +1,6 @@
 # Use Oh My ZSH for fancy prompts.
-# All I do here now is change colours for `ls` based on the colour of my terminal
+# Spaceship prompt uses Xterm colours
+# https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 
 unset LSCOLORS
 unset LS_COLORS
@@ -105,6 +106,7 @@ function pink_terminal
 {
 	SPACESHIP_CHAR_COLOR_SUCCESS=188
 	SPACESHIP_CHAR_COLOR_FAILURE=203
-	SPACESHIP_TIME_COLOR=188
+	SPACESHIP_TIME_COLOR=139
+	SPACESHIP_EXEC_TIME_COLOR=139
 }
 
