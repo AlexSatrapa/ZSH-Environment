@@ -46,6 +46,12 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2
+x-font-size = 14
+x-font-name = InputMonoNarrow
+
 [Makefile]
 indent_style = tab
 CONFIG
