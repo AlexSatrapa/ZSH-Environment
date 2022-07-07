@@ -8,10 +8,6 @@ export DISABLE_AUTO_UPDATE='false'
 export plugins=(git git-flow git-extras vagrant osx themes scd setenv keychain zsh-autosuggestions zsh-syntax-highlighting web-search alias-tips tpgvpn)
 zstyle :omz:plugins:keychain agents ssh
 
-# Ensure GitHub SSH key is loaded in case there's an update to do
-keychain ~/.ssh/AlexSatrapaGitHubMBAM1
-export DISABLE_AUTO_UPDATE="true"
-
 if [ -f $ZSH/custom/themes/spaceship.zsh-theme ] ; then
    export ZSH_THEME="spaceship"
    SPACESHIP_RPROMPT_ORDER=( user dir host git hg package node ruby elm elixir xcode swift golang php rust haskell julia docker aws venv conda pyenv dotnet ember kubectl terraform exec_time )
