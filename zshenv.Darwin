@@ -1,0 +1,5 @@
+export XDG_CONFIG_HOME=$HOME/Library/XDG_CONFIG
+export XDG_DATA_HOME=$HOME/Library/XDG_DATA
+export XDG_CACHE_HOME=$HOME/Library/XDG_CACHE
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
