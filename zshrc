@@ -16,6 +16,6 @@ if [ -d $HOME/Applications ] ; then
 	PATH=$PATH:$HOME/Applications
 fi
 
-for zshrc_snippet in ~/.zsh.d/[0-9][0-9]*[^~] ; do
+for zshrc_snippet in $ZDOTDIR/zsh.d/[0-9][0-9]*[^~] ; do
    source $zshrc_snippet
 done
