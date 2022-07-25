@@ -5,7 +5,7 @@
 export ZSH=$HOME/Documents/GitHub/OhMyZSH
 export DISABLE_AUTO_UPDATE='false'
 
-export plugins=(git git-flow git-extras vagrant osx themes scd setenv keychain zsh-autosuggestions zsh-syntax-highlighting web-search alias-tips tpgvpn)
+export plugins=(git git-flow git-extras vagrant macos themes scd setenv keychain zsh-autosuggestions zsh-syntax-highlighting web-search alias-tips tpgvpn)
 zstyle :omz:plugins:keychain agents ssh
 
 if [ -f $ZSH/custom/themes/spaceship.zsh-theme ] ; then
